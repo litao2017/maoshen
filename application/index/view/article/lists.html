@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><{$cate_info.cate_name}>_<{$config.title}></title>
+
+  <meta name="keywords" content="<{$config.keywords}>" />
+  <meta name="description" content="<{$config.description}>" />
+ 
+  <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>style.css" />
+  <script src="<{$Think.const.INDEX_JS_URL}>jquery.min.js" type="text/javascript"></script>
+  <!--[if lte IE 9]>
+      <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>ieCss.css" />
+    <![endif]-->
+    <script language="javascript">
+    function killErrors()
+    {
+      return true;
+    }
+    window.onerror = killErrors;
+    </script>
+    <style>
+    
+    .active-page {
+		display:inline-block;
+		border-radius:3px;
+		margin-left:5px;
+    background-color: #fd742e;
+    border-color: #fd742e;
+    color: #fff !important;
+	height: 34px;
+    min-width: 34px;
+    line-height: 34px;
+    padding: 0 12px;
+    text-align: center;
+	
+	}
+    </style>
+</head>
+<body>
+<!--通用头部 start-->
+ {include file="public/header" /} 
+  <!-- 通用头部 end -->
+<!--.container start -->
+<div class="container">
+ 
+        <div class="blank30"></div>
+    <div class="main clearfix">
+	    <div class="sideBox">
+					<a class="sideBox-nav" href="javascript:;">
+			<div class="sideBox-title"><{$cate_info.cate_name}></div>
+			<div class="sideBox-subtitle opacity4">news</div>
+		</a>
+		<div class="sideBox-list">
+        					{foreach $cate_list as $cate}
+                            <a class="sideBox-list-a {if $cate_info.cate_name==$cate.cate_name}on{/if}" href="<{:real_url('article',$is_html,$cate.cate_id)}>"><{$cate.cate_name}></a>
+	      					
+                            {/foreach}
+                            
+	      			</div>
+    		</div>        <div class="rightBox">
+    		<div class="bznews clf">
+            
+            		{foreach $article_list as $article}
+    			    								<a href="<{:real_url('article',$is_html,0,$article.article_id)}>" class="bznews-list">
+						<div class="news-list-times"><{$article.create_time|date="y-m-d",###}></div>
+						<div class="bznews-list-text"><{$article.article_name}></div>
+					</a>
+                    
+                    {/foreach}
+                                        													
+									</div>
+			<div class="pgs clf">
+				<div class="pg">
+        <div class="dux-page">
+          	<{$html_page}>
+        </div></div>
+			</div>
+        </div>
+    </div>
+    <div class="blank30"></div>
+</div>
+<!--.container end -->
+	
+<!--通用尾部 start-->
+{include file="public/footer" /} 
+<!--通用尾部 end-->
+
+</body>
+</html>

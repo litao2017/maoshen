@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>系统设置</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+      
+   <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css">
+        <script src="<{$Think.const.VENDOR_URL}>kindeditor/kindeditor.js" type="text/javascript" charset="utf-8" ></script>
+<script type="text/javascript" charset="utf-8" src="<{$Think.const.VENDOR_URL}>kindeditor/lang/zh_CN.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>bootstrap.min.js"></script>
+<style type="text/css">
+.input-group{
+  margin-top:10px;
+}
+.input-group .w100{
+  width:100px;
+}
+.input-group .w200{
+  width:200px;
+}
+.btn-group{
+ display:block;
+  margin:0px auto;
+  height:50px;
+}
+.btn-group>.btn:first-child{
+  float:none;
+    display:block;
+  margin:0px auto;
+
+}
+</style>
+    </head>
+
+    <body>
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+    window.editor = K.create('#editor_id');
+    });
+</script>
+<div class="panel panel-info">
+  <!--<div class="panel-heading">当前位置是：基本设置</div>-->
+  <div class="panel-body">
+  <form action="/index.php/admin/config/set" method="post">
+
+ 	<ul class="nav nav-tabs" role="tablist" id="feature-tab">
+ 
+        <li class="active"><a href="#tab-config" role="tab" data-toggle="tab">网站设置</a></li>
+        
+        
+    </ul>
+
+    <div class="tab-content">
+    
+        <div class="tab-pane active" id="tab-config">
+        
+          <div class="input-group"><span class="input-group-addon " id="basic-addon1">网站标题</span><input name="title" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.title}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">网站关键词</span><input name="keywords" type="text" class="form-control " placeholder="" aria-describedby="basic-addon1" value="<{$config.keywords}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">网站描述</span><input name="description" type="text" class="form-control " placeholder="" aria-describedby="basic-addon1" value="<{$config.description}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">版权信息</span><input name="copyright" type="text" class="form-control " placeholder="" aria-describedby="basic-addon1" value="<{$config.copyright}>"></div>
+  
+           <div class="input-group"><span class="input-group-addon " id="basic-addon1">公司名称</span><input name="name" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.name}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">公司地址</span><input name="address" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="<{$config.address}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">联系电话</span><input name="tel" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.tel}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">客服QQ</span><input name="qq" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.qq}>"></div>
+    
+      <div class="input-group"><span class="input-group-addon " id="basic-addon1">微信</span><input name="wx" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.wx}>"></div>
+    
+      <div class="input-group"><span class="input-group-addon " id="basic-addon1">传真</span><input name="fax" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.fax}>"></div>
+    
+      <div class="input-group"><span class="input-group-addon " id="basic-addon1">邮箱</span><input name="email" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.email}>"></div>
+    
+      <div class="input-group"><span class="input-group-addon " id="basic-addon1">网址</span><input name="site" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.site}>"></div>
+       <div class="input-group"><span class="input-group-addon " id="basic-addon1">备案号</span><input name="beian" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$config.beian}>"></div>
+         <div class="input-group"><span class="input-group-addon " id="basic-addon1">系统公告</span><input name="notice" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1" value="<{$config.notice}>"></div>
+       
+        
+ <input type="hidden" name="id" value="<{$config.id}>">
+ <br>
+  <div class="btn-group" role="group"><input type="submit" class="btn btn-primary" value="确认保存"></div>
+  </form>
+   
+   </div>
+   
+   </div>
+  
+  
+       
+
+    </body>
+</html>

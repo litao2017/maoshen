@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>添加图文</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+      
+   <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css">
+   <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>fileinput.min.css">
+        <script src="<{$Think.const.VENDOR_URL}>kindeditor/kindeditor.js" type="text/javascript" charset="utf-8" ></script>
+<script type="text/javascript" charset="utf-8" src="<{$Think.const.VENDOR_URL}>kindeditor/lang/zh_CN.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>bootstrap.min.js"></script>
+    <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>fileinput.min.js"></script>
+        <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>zh.js"></script>
+
+<style type="text/css">
+.input-group{
+  margin-top:10px;
+}
+.input-group .w100{
+  width:100px;
+}
+.input-group .w200{
+  width:200px;
+}
+.btn-group{
+ display:block;
+  margin:0px auto;
+  height:50px;
+}
+.btn-group>.btn:first-child{
+  float:none;
+    display:block;
+  margin:0px auto;
+
+}
+.w50{height:100px !important;}
+</style>
+    </head>
+
+    <body>
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+    window.editor = K.create('#editor_id');
+    });
+
+
+</script>
+<script type="text/javascript">
+
+$(function(){
+$("#img_url").fileinput({  
+   language: 'zh',  
+   uploadUrl: "/admin/imgtext/upload", //上传后台操作的方法  
+   uploadAsync: false, //设置上传同步异步 此为同步  
+    
+  
+   enctype: 'multipart/form-data',  
+   maxFileSize: 500,
+   maxFileCount: 10, 
+   allowedFileExtensions: ['jpg', 'png','gif'] //限制上传文件后缀  
+})
+
+
+
+$("#img_url").on("filebatchuploadsuccess", function (event,data,previewId,index) {
+	
+	$val = $("#imgurls").val();
+	
+	$("#imgurls").val($val+data.response);
+	
+    });
+
+
+$("#img_url").on("fileuploaded", function (event,data,previewId,index) {
+	
+	$val = $("#imgurls").val();
+	
+	$("#imgurls").val($val+data.response);
+	
+    });
+
+
+
+
+
+})
+
+
+
+
+</script>
+<div class="panel panel-info">
+  <!--<div class="panel-heading">当前位置是：案例管理->添加案例</div>-->
+  <div class="panel-body">
+  <form action="/index.php/admin/imgtext/add" method="post" enctype="multipart/form-data">
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">图文标题</span><input name="title" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$img_text.title}>"></div>
+    <div class="input-group"><span class="input-group-addon " id="basic-addon1">图文分类</span><select name="cate_id" class="form-control w200">
+        
+         {foreach $cate_list as $cate}
+     <option {if $cate.cate_id == $cate_id }selected {/if} value="<{$cate.cate_id}>"><{$cate.cate_name}></option>
+ 
+     {/foreach}
+    </select></div>
+    
+    
+      <div class="input-group"><span class="input-group-addon" id="basic-addon1">图文内容</span><textarea  name="content" class="form-control" placeholder="" aria-describedby="basic-addon1" style=" height:100px; width:400px"><{$img_text.content}></textarea></div>
+  
+      
+<div class="input-group"><span class="input-group-addon" id="basic-addon1">图文图集</span>
+{if $img_text}
+{foreach $img_text['imgurls'] as $imgurl}
+<img src="<{$imgurl}>" width="100px" height="100px">
+{/foreach}
+{/if}
+<input type="file" class="images" id="img_url" name="images[]" accept="image/*"  multiple>  
+</div>       
+      
+       
+     
+
+           
+      
+      
+      
+      
+      
+      <!-- <div class="input-group"><span class="input-group-addon " id="basic-addon1">排序</span><input name="sort" type="number" class="form-control w100" placeholder="" aria-describedby="basic-addon1" value="<{$anli.sort|default=0}>"></div>-->
+       
+       
+ <input type="hidden" id="imgurls" name="imgurls" value=>
+
+ <input type="hidden" name="it_id" value="<{$img_text.it_id}>">
+ <br>
+  <div class="btn-group" role="group"><input type="submit" class="btn btn-primary" value="确认保存"></div>
+  </form>
+   </div>
+</div>
+
+       
+
+    </body>
+</html>

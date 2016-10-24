@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>快递信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+
+
+
+
+
+<ul class="bd_type">
+    <li style='width:100%' class="currnet">快递信息</li>
+   
+
+ </ul>
+
+
+
+<section>
+      <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+  
+ <li class="noicon" style="text-align: center;color:#3c6">物流：<{$kuaidi_name_c}>&nbsp;&nbsp;&nbsp;&nbsp;单号：<{$kuaidi.nu}></li>
+    </ul>
+{if $kuaidi.message == 'ok'}
+{foreach $kuaidi.data as $info}
+      <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+  
+ <li class="noicon">快递信息：<{$info.context}></li>
+<li class="noicon">操作时间：<{$info.ftime}></li>
+    </ul>
+    {/foreach}
+{/if}
+  </section>       
+
+</body>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content=""/>
+<meta name="Description" content=""/>
+<title>忘记密码</title>
+<style>
+*{padding:0;margin:0;}
+body{background:#f8f4d9;color:#000;font-size:14px;}
+ul{list-style:none;}
+a{text-decoration:none;color:#000;}
+#main{width:1100px;;margin:0 auto;}
+.forget{background:#f3f0eb;margin:10px 0px;text-align:center;border:1px solid #934948;height:800px;position:relative;}
+
+table{border:1px solid #b77a75;margin:0 auto;background:#f8f4d9;height:500px;width:500px;font-weight:bold;margin-top:150px;box-shadow:2px 2px 2px #a19a88;}
+label{font-size:30px;font-weight:bold;}
+
+input{box-shadow:2px 2px 2px #a19a88;}
+.emailtel,.uname,.pwd{background:#f8f4d9;height:35px;width:200px;border:1px solid #cba08d;}
+.btn{background:#e0dab6;color:#fff;width:100px;height:40px;font-size:30px;font-weight:bold;}
+
+
+
+.reproduct{border:1px solid #be847d;background:#fcfaee;}
+.reproduct_top{background:#81100c;height:25px;color:#FFF;position:relative;}
+.reproduct_top a{color:#fff;font-size:14px;display:inline-block;background:#9c2a2a;width:60px;line-height:25px;text-align:center;border-radius:3px;}
+.reproduct_top .more{position:absolute;right:25px;background:#c0575b;width:80px;}
+.reproduct_c{padding:5px;max-width:200px;margin:10px 5px 10px 0px;border:1px solid #c7c5bc;display:inline-block;}
+.reproduct_c img{width:200px;height:270px;}
+.reproduct_ul ul li{margin:2px 0;font-size:10px;}
+</style>
+<script>
+
+function check_password( password )
+{
+    if ( password.length < 6 )
+    {
+        document.getElementById('password_notice').innerHTML = "密码太短";
+		
+		document.forms['formUser'].elements['submit'].disabled = true;
+    }
+    else
+    {	
+		document.getElementById('password_notice').innerHTML = "";
+       
+	   document.forms['formUser'].elements['submit'].disabled = false;
+    }
+}
+</script>
+
+</head>
+<body>
+{include file="Public/header"}
+<div id="main">
+	<div class="forget">
+    	<form method="post" name="formUser" action="">
+        	<table>
+            	<tr>
+                	<td class=""><label for="">用户账号：</label></td>
+                    <td><input class="uname" name="username" type="text" value=""></td>
+            	</tr>               	
+            	<tr>
+                	<td class=""><label for="">注册邮箱或手机：</label></td>
+                    
+                    <td><input class="emailtel" name="emailtel" type="text" value=""></td>
+            	</tr>
+            	<tr>
+                	<td class=""><label for="">新密码：</label></td>
+                    
+                    <td><input class="pwd" name="password" onblur="check_password(this.value);" type="password" value=""><span style="color:#FF0000" id="password_notice">*</span></td>
+                    
+            	</tr>
+            
+      			<tr>
+                	<td class="t1" colspan="2"> <input class="btn" id="submit" name="submit" type="submit" value="提 交"></td>
+                    
+            	</tr>
+                
+            </table>
+    	</form>
+    
+    
+    
+    </div>
+
+
+
+
+
+
+		
+
+	
+	 <div class="reproduct">
+    	<div class="reproduct_top">
+             	<a href="">向您推荐</a>
+                <a class="more" href="/index/goods/mall_center">更多>>></a>
+        </div>
+      
+        {foreach name="best_goods" item="goods"}
+        <a href="/index/goods/goods_info/goods_id/<{$goods.goods_id}>" title="<{$goods.goods_name}>">
+    	<div class="reproduct_c">
+        	<img src="<{$goods.goods_src}>" alt="<{$goods.goods_name}>">
+            <div class="reproduct_ul">
+            	<h5><{$goods.name}></h5>
+            	<ul>
+                	<li>价 格：<span {if $goods.promote_price != 0}style="text-decoration:line-through;"{/if}><{$goods.goods_price}>/元</span></li>
+                    <li style="color:red;">促销价：{if $goods.promote_price != 0}
+          <{$goods.promote_price}>/元
+          {else}
+         无
+          {/if}</li>
+                    <li>五行分类：<{$goods.cate_name}></li>
+                </ul>
+            </div>
+        </div>
+        </a>
+         {/foreach} 
+      
+    </div>
+</div>
+{include file="Public/footer"}
+</body>
+</html>

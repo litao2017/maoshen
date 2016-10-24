@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><{$shop_name}></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>index.css?11">
+    <style type="text/css">
+    a{
+          text-decoration: none;
+    }
+    #comment{
+        background:rgba(0,0,0,0.2);
+        width:100%;
+        height:100%;
+        position: fixed;
+        left:0px;
+        top:0px;
+        z-index: 10;
+        display: none;
+    }
+#ul_list{
+        background:#eee;
+        width:90%;
+        margin:0px auto;
+        font-size: 12px;
+        height:80%;
+        margin-top:20px;
+    }
+.ul_list li{
+     background:#fff;
+    overflow: hidden;
+    list-style: none;
+     width:95%;
+     padding:0px 2.5%;
+     margin:10px auto;
+ }
+ .ul_list li img{
+     height:40px;
+     width:40px;
+     border-radius:40px;
+     margin:5px 10px;
+     vertical-align:middle;
+ }
+  .ul_list li span{
+
+    line-height: 50px;
+    float:right;
+    color:#f93;
+ }
+ .ul_list li .user_name{
+
+   
+   float:left;
+     margin:5px 0px;
+ }
+ .ul_list li .user_name p{
+    line-height: 20px;
+    width:200px;
+ } 
+.currnet{
+        height: 49px;
+    line-height: 49px;
+    text-align: center;
+    color: #888;
+    border-bottom: 1px solid #f93;
+    color:#f93;
+}
+.close{
+    position: absolute;
+    right:2.5%;;
+    top:10px;
+    width:40px;
+    height:40px;
+    line-height: 40px;
+    text-align: center;
+    background:#fff;
+    border:1px solid #f93;
+    color:#f93;
+    border-radius: 40px;
+
+}
+iframe{
+    height:100%;
+    width:100%;
+}
+#com{
+  font-size: 13px;
+  padding:5px;
+  position: fixed;
+  bottom:120px;
+  right:5px;
+  background:#f93;
+  color:#fff;
+  border-radius: 10px;
+  height:22px;
+  line-height: 22px;
+}
+
+    </style>
+</head>
+<body>
+<div class="content">
+    <{$goods_info.goods_content|htmlspecialchars_decode}>
+</div>
+<a href="/wap/order/makeorder/id/<{$goods_info.goods_id}>" class="buy">
+马上购买
+</a>
+{include file="public/wx_share" /}
+
+
+<a href="javascript:show()" id="com" style="display:none"><{$pl_num}>评</a>
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<{$qq}>&site=qq&menu=yes" style="position: fixed;bottom:50px;right:0px;"><img border="0" src="<{$Think.const.WAP_IMAGE_URL}>qq.png" style="width:50px" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+<div id="comment">
+<a href="javascript:close();" class="close">x</a>
+<div id="ul_list">
+    
+<iframe src="/wap/comment" frameborder=0 ></iframe>
+</div>
+</div>
+<script type="text/javascript">
+    function close(){
+        document.getElementById("comment").style.display="none";
+    }
+    function show(){
+        document.getElementById("comment").style.display="block";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>订单详情</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+
+
+
+
+
+<ul class="bd_type">
+    <li style='width:100%' class="currnet">订单详情</li>
+   
+
+ </ul>
+
+
+
+<section>
+      <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+  
+ <li class="noicon">收件人：<{$order_info.consignee}></li>
+<li class="noicon">联系电话：<{$order_info.tel}></li>
+<li class="noicon">地址：<{$order_info.address}></li>
+    </ul>
+          <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+  
+ <li class="noicon">订单号：<{$order_info.order_sn}></li>
+  <li class="noicon">订单状态：                   
+{if $order_info.status == 0} <span >{/if}
+{if $order_info.status == 1}<span style="color:#f29307">{/if}
+{if $order_info.status == 2}<span style="color:#1b75b6">{/if}
+{if $order_info.status == 3}<span style="color:#89bf00">{/if}
+{if $order_info.status == 4}<span style="color:red">{/if}<{$order_status[$order_info.status]}>
+</span></li>
+ {foreach $order_goods as $v}
+<li class="noicon"><img src="<{$v.goods_src}>" alt="" style="width:40px;vertical-align:middle">&nbsp;&nbsp;<{$v.goods_name}>&nbsp;&nbsp;<font style="color:red">×<{$v.buy_number}></font></li>
+{/foreach}
+ <li class="noicon">总金额：<font style="color:red"><{$order_info.amount}></font></li>
+
+    </ul>
+    {if $order_info.status == 2 and $order_info.kuaidi_name !="" and $order_info.kuaidi_sn != "" or $order_info.status == 3}
+             <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+<li class="noicon"><{$kuaidi_name_c}>：<font style="color:red"><{$order_info.kuaidi_sn}></font></li>
+ <li onclick="location.href='/wap/order/kuaidi/kuaidi_name/<{$order_info.kuaidi_name}>/kuaidi_sn/<{$order_info.kuaidi_sn}>'">查看物流信息</li>
+
+    </ul>
+    {/if}
+</section>
+
+{include file="public/footer_gr" /}
+</body>

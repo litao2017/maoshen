@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>合伙人升级</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+ .tx_price{
+    overflow:hidden;
+ }
+
+.tx_price button{
+    margin-top:5px;
+    width:38%;
+    float:left;
+    margin-left: 2%;
+    border-width:1px;
+    box-sizing: border-box;
+   
+}
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+
+
+
+
+
+<ul class="bd_type">
+    <li style='width:100%' class="currnet">合伙人升级</li>
+   
+
+ </ul>
+
+
+
+<section>
+<form id="payment"  onsubmit="return checkForm()" method="post" action="/wap/user/up_level">
+ <input type="hidden" name="postcode"  value="<{$postcode}>">
+
+    <fieldset>
+      
+           <ol>
+            <li>
+             <label >联系人：</label>
+   <input type="text" name="username" value="" placeholder="" id="username" required>
+
+                 </li>
+                
+                   <li>
+                     <label >联系电话：</label>
+           <input type="number" name="tel" value="" placeholder="" id="tel" required>
+                 </li>
+                  <li class="type tx_price">
+                     <label style="width:100%;">升级意向：</label>
+          <button onclick="changeType(1);" type="button" class="btn current"  id="1">城市合伙人</button>
+                            <button onclick="changeType(2)" type="button" class="btn"  id="2">全球合伙人</button>
+                 </li>
+                   <li class="mytype tx_price">
+                     <label style="width:100%;">您的状况：</label>
+          <button onclick="changeMytype(1);" type="button" class="btn current"  id="m1">有团队</button>
+                            <button onclick="changeMytype(2)" type="button" class="btn"  id="m2">有门店</button>
+                            <br>
+                        <button onclick="changeMytype(3);" type="button" class="btn"  id="m3">自己试试</button>     
+                 </li>
+                    <li>
+                     <label >备注：</label>
+          <textarea name="note"></textarea>
+                 </li>
+                  <li>
+          
+        注：升级后您将不再有推荐人，您的推荐人将获得一定的推荐费。您目前的推荐人ID：{if $parent_info}<{$parent_info.user_name}>&nbsp;-&nbsp;<{$parent_info.nickname}>{else}官方推荐{/if}
+                 </li>
+         
+        
+                 </ol>
+                 <input type="hidden" name="up_type" value="1" id="up_type">
+                 <input type="hidden" name="my_type" value="1" id="my_type">
+                 <button type="submit" class="btn" style="width:80%;display:block">提交</button>
+    </fieldset>
+    </form>
+  
+</section>
+<script type="text/javascript">
+  function checkForm(){
+    var tel=document.getElementById("tel").value;
+  var re=/^\d{11}$/
+if(!re.test(tel)){
+  alert('请填写正确的手机号码');
+  return false;
+}
+}
+ function changeType(payType){
+
+$("#up_type").val(payType);
+$(".type .current").removeClass('current');
+$("#"+payType).addClass('current');
+}
+ function changeMytype(payType){
+
+$("#my_type").val(payType);
+$(".mytype .current").removeClass('current');
+$("#m"+payType).addClass('current');
+}</script>
+{include file="public/footer_gr" /}
+</body>

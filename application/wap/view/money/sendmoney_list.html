@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title><{$fans_level}>级粉丝订单</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+
+header{
+    background:url(<{$Think.const.WAP_IMAGE_URL}>123.jpg);
+    background-size:cover;
+    padding:15px 0px;
+}
+#header_idv{
+    
+    width:100%;
+    background: rgba(255, 255, 255, .3);
+    border-color: #e3ebc3;
+    border-color: rgba(255, 255, 255, .6);
+    border-style: solid;
+    border-width: 2px;
+    box-sizing: border-box ;
+}
+footer .ul_footer_nav {
+    overflow: hidden;
+    height: 60px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid #efefef;
+    width: 100%;
+    background: #fff;
+}
+footer .ul_footer_nav li img {
+    width: 60px;
+    height: 60px;
+}
+.bd_type{
+    overflow:hidden;
+    
+    width:100%;
+  
+    height:50px;
+    background:#fff;
+}
+.bd_type li{
+    float:left;
+    width:50%;
+    height:49px;
+    line-height: 49px;
+    text-align:center;
+    color:#888;
+      border-bottom:1px solid #ccc;
+}
+.bd_type li.currnet{
+    border-bottom-color: #3c6;
+    color:#3c6;
+}
+.ul_list li{
+     background:#fff;
+     height:40px;
+font-size: 12px;
+     width:100%;
+     overflow:hidden;
+     border-bottom: 1px dotted #ccc;
+ }
+
+  .ul_list li span{
+
+     width:20%;
+  height:32px;
+  padding:4px 0px;
+  word-break:break-all ;
+    float:left;
+    text-align: center;
+ }
+   .ul_list li span font{
+  font-size: 11px;
+   }
+ .ul_list li .span1{
+  width:17%;
+ }
+ .ul_list li .span2{
+  width:13%;
+ }
+ .ul_list li .span3{
+  width:23%;
+ }
+ .ul_list li .span4{
+  width:13%;
+ }
+ .ul_list li .span5{
+width:34%;
+ }
+ .pagination{
+  margin:10px auto;
+  overflow:hidden;
+  text-align: center;
+ }
+ .pagination li{
+display:inline-block;
+padding:10px;
+ }
+  .pagination li a{
+    width:100%;
+    height:100%;
+  }
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+<!-- <div class="notice">&nbsp;&nbsp<span onclick="closeNotice()" >×</span></div> -->
+<script>  
+function closeNotice(){
+    var notice=document.getElementsByClassName('notice')[0];
+    notice.parentNode.removeChild(notice);
+}
+</script>
+
+
+
+
+<ul class="bd_type">
+    <li style='width:100%' class="currnet">提现记录</li>
+   
+
+ </ul>
+
+
+
+<section>
+
+    {if $sendmoney_list}
+  <ul class="ul_list">
+  <li><span class="span1">提现类型</span><span class="span2">金额</span><span class="span3">提交时间</span><span class="span4">审核</span><span class="span5">管理员回复</span></li>
+{foreach $sendmoney_list as $v}
+    <li><span class="span1"><{$sendmoney_type[$v.pay_type]}>
+    
+  
+    </span><span class="span2"><{$v.money}></span><span class="span3"><{$v.create_time|date="Y-m-d",###}></span><span class="span4">{if $v.status == 0}<font style="color:#f29307">{/if}
+{if $v.status == 1}<font style="color:#1b75b6">{/if}
+{if $v.status == 2}<font style="color:#89bf00">{/if}
+    <{$sendmoney_status[$v.status]}></font></span><span class="span5"><{$v.note}></span></li>
+
+   {/foreach}
+</ul>
+{else}
+<div style="text-align: center;margin-top:10px;">
+  暂无信息~~~
+</div>
+{/if}
+</section>
+ <{$sendmoney_list->render()}>
+{include file="public/footer_gr" /}
+</body>

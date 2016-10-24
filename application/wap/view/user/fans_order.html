@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title><{$fans_level}>级粉丝订单</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+  <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>jquery-1.9.1.min.js"></script>
+<style type="text/css"> 
+
+
+.bd_type{
+    overflow:hidden;
+    
+    width:100%;
+  
+    height:50px;
+    background:#fff;
+}
+.bd_type li{
+    float:left;
+    width:50%;
+    height:49px;
+    line-height: 49px;
+    text-align:center;
+    color:#888;
+      border-bottom:1px solid #ccc;
+}
+.bd_type li.currnet{
+    border-bottom-color: #3c6;
+    color:#3c6;
+}
+.ul_list li{
+     background:#fff;
+     height:40px;
+font-size: 12px;
+     width:100%;
+     overflow:hidden;
+     border-bottom: 1px dotted #ccc;
+ }
+
+  .ul_list li span{
+
+     width:20%;
+  height:32px;
+  padding:4px 0px;
+  word-break:break-all ;
+    float:left;
+    text-align: center;
+ }
+  .ul_list li span font{
+  font-size: 11px;
+   }
+ .ul_list li .span1{
+  width:28%;
+ }
+ .ul_list li .span2{
+  width:33%;
+ }
+ .ul_list li .span3, .ul_list li .span4,.ul_list li .span5{
+  width:13%;
+ }
+ .pagination{
+  margin:10px auto;
+  overflow:hidden;
+  text-align: center;
+ }
+ .pagination li{
+display:inline-block;
+padding:10px;
+ }
+  .pagination li a{
+    width:100%;
+    height:100%;
+  }
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+<!-- <div class="notice">&nbsp;&nbsp<span onclick="closeNotice()" >×</span></div> -->
+<script>  
+function closeNotice(){
+    var notice=document.getElementsByClassName('notice')[0];
+    notice.parentNode.removeChild(notice);
+}
+</script>
+
+
+
+
+<ul class="bd_type">
+    <li onclick="location.href='/wap/user/fans_order'" {if $paixu == 0}class="currnet"{/if}>最新排序</li>
+    <li onclick="location.href='/wap/user/fans_order/order/1'" {if $paixu == 1}class="currnet"{/if}>金额排序</li>
+
+ </ul>
+
+
+
+<section>
+
+    {if $order_list}
+  <ul class="ul_list">
+  <li><span class="span1">下单会员号</span><span class="span2">订单号</span><span class="span3">金额</span><!-- <span class="span4">比例</span><span class="span5">收获</span> --></li>
+{foreach $order_list as $order}
+    <li><span class="span1"><{$order.user_name}><br/>
+    
+  {if $order.status == 1}<font style="color:#f29307">{/if}
+{if $order.status == 2}<font style="color:#1b75b6">{/if}
+{if $order.status == 3}<font style="color:#89bf00">{/if}
+    <{$order_status[$order.status]}></font>
+    </span><span class="span2"><{$order.order_sn}><br/><font style="color:#888"><{$order.pay_time|date="Y-m-d",###}></font></span><span class="span3"><{$order.fencheng_price}></span><!-- <span class="span4"><{$order.fencheng_percent*100|round}>%</span><span class="span5"><{$order.get_fencheng_price}></span> --></li>
+
+   {/foreach}
+</ul>
+{else}
+<div style="text-align: center;margin-top:10px;">
+  暂无信息~~~
+</div>
+{/if}
+</section>
+<script type="text/javascript">
+             var page=1;
+          var num=10;
+   var fans_level=<{$fans_level}>;
+   var order=<{$paixu}>;
+function more() {
+    $.post('/wap/user/ajax_fans_order',{"num": num,"page":page,"order":order,"level":fans_level},function(data){
+        if(data==""){
+           // alert("没有更多信息！");
+        }else{
+             $(".ul_list").append(data);
+                    page=page+1;
+        }
+                   
+    });
+ }
+       $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+          console.log(scrollTop);
+        if (scrollTop + windowHeight == scrollHeight) {
+             more();
+            // alert(1);
+        }
+   });
+</script>
+{include file="public/footer_gr" /}
+</body>

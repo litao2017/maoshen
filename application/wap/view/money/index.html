@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>提现</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+  <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>jquery-1.9.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+button.current{
+     border-width: 2px;
+ }
+
+
+.ul_list li{
+     background:#fff;
+     height:50px;
+
+     width:90%;
+     padding:0px 5%;
+     margin:10px auto;
+ }
+ .ul_list li img{
+     height:40px;
+     width:40px;
+     border-radius:40px;
+     margin:5px 30px;
+     vertical-align:middle;
+ }
+  .ul_list li span{
+     height:50px;
+    line-height: 50px;
+    float:right;
+    color:#3c6;
+ }
+ .tx_price{
+    overflow:hidden;
+ }
+
+.tx_price button{
+    margin-top:5px;
+    width:46%;
+    float:left;
+    margin-left: 2%;
+   
+}
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+
+
+
+
+
+<ul class="bd_type">
+    <li onclick="changeType('wx_tx')" class="currnet" id="wx_tx" >微信提现</li>
+    <li onclick="changeType('bank_tx')" id="bank_tx">银行卡</li>
+ </ul>
+
+
+
+<section id="payment" >
+      <div style="background:#fff;padding:10px 0px;border-bottom: 1px solid #ccc;text-align: center;width:100%">
+
+ &nbsp;&nbsp;&nbsp;&nbsp;您可提现 : <font style="font-size: 18px;color:red;font-weight: bold"><{$sure_fencheng}></font>&nbsp;&nbsp;&nbsp;&nbsp;提现额最低为<font style="color:red"><{$shop_config.min_money}></font>
+    
+       
+     
+    </div>
+
+  <form  onsubmit="return checkForm()" method="post" action="/wap/money/add_sendmoney" >
+ <input type="hidden" name="postcode"  value="<{$postcode}>">
+
+  <input type="hidden" name="pay_type"  value="0" id="pay_type">
+    <fieldset>
+           <legend>选择提现金额</legend>
+        <ol>
+           
+          
+                        <li class="tx_price">
+                          
+                            <button onclick="changePay(50);" type="button" class="btn current"  id="p50">50</button>
+                            <button onclick="changePay(100)" type="button" class="btn"  id="p100">100</button>
+                            <br>
+                            <button onclick="changePay(150)" type="button" class="btn"  id="p150">150</button>
+                            <button onclick="changePay(200)" type="button" class="btn"  id="p200">200</button>
+                        </li>
+                         <li class="tx_price">
+                          
+                          或&nbsp;&nbsp;自定义提现金额 ：<input type="number" name="pay" value="<{$shop_config.min_money}>" id="pay" placeholder="提现金额" style="width:80px">&nbsp;&nbsp;
+                        </li>
+                  <li id="tip_wx_tx" class="tip">提示：微信提现，无需提交资料，平台将以微信红包的形式发送给您微信上，提交后请留下公众号消息,微信提现最高可200元，到账速度快</li>
+              <li id="content_bank_tx" style="display:none">
+                        开户支行：<input type="text" name="bank_name" value="" id="bank_name"><br>
+                        开户姓名：<input type="text" name="bank_user" value="" id="bank_user"><br>
+                        银行卡号：<input type="number" name="bank_card" value="" id="bank_card"><br>
+                        联系电话：<input type="number" name="tel" value="" id="tel" placeholder="如若卡号不正确方便客服联系"></li>
+                  <li id="tip_bank_tx" class="tip" style="display:none">提示：第一次输入将系统保存您的提现信息，第二次将不用重复输入</li>
+          
+    
+        </ol>
+          <button type="submit" class="btn" style="width:80%;display:block">提交申请</button>
+            <button type="button" class="btn" style="width:80%;display:block" onclick="location.href='/wap/money/sendmoney_list'">提现记录</button>
+    </fieldset>
+    </form>
+  
+    <script type="text/javascript">
+        function changePay(payType){
+
+$("#pay").val(payType);
+$("button.current").removeClass('current');
+$("#p"+payType).addClass('current');
+}
+function changeType(id){
+    $("li.currnet").removeClass('currnet');
+    $("#"+id).addClass('currnet');
+    $(".tip").hide();
+    $("#tip_"+id).show();
+    if(id=='wx_tx'){
+        $("#pay_type").val(0);
+        $("#content_bank_tx").hide(400);
+        
+    }
+    else{
+
+         $("#pay_type").val(1);
+        $("#content_"+id).show(400);
+   
+    }
+       
+}
+function checkForm(){
+    var pay_type=$("#pay_type").val();
+    var min_money=<{$shop_config.min_money}>;
+    var has_money=<{$sure_fencheng}>;
+    var money=$("#pay").val();
+    
+    if(money<min_money){
+        ltAlter('金额小于最小提现额'+min_money);
+        return false;
+    }
+    if(money>has_money){
+        ltAlter('提现金额大于可提现金额');
+        return false;
+    }
+    if(pay_type==0){
+        if(money>200){
+            ltAlter('微信提现不能超过200');
+        }
+    }
+    if(pay_type==1){
+        var bank_name=$("#bank_name").val();
+        var bank_user=$("#bank_user").val();
+        var bank_card=$("#bank_card").val();
+ 
+        if(!bank_name || !bank_card || !bank_user ){
+            ltAlter('银行卡资料填写不完整');
+            return false;
+        }
+    }
+}
+</script>
+</section>
+{include file="public/footer_gr" /}
+<style type="text/css" media="screen">
+    #smark{
+        width:100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.6;
+        position: fixed;
+        top:0px;
+        left: 0px;
+        z-index: 100;
+        display: none;
+    }
+    .dig{
+        width:80%;
+        text-align: center;
+        height:80px;
+        line-height: 80px;
+        margin:  200px 10%;
+        background: rgba(255, 255, 255, .5);
+        color:#fff;
+        font-size: 18px;
+    }
+</style>
+<div id="smark"><div class="dig"></div></div>
+<script>
+function ltAlter(msg,fun){
+    $(".dig").html(msg);
+    $("#smark").fadeIn(400);
+    setTimeout(function(){
+        $("#smark").fadeOut(400);
+        if(fun)
+            fun();
+    }, 1500)
+}
+</script>
+</body>

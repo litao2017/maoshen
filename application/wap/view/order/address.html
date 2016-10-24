@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>收货地址管理</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+         <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>jquery-1.9.1.min.js"></script>
+   <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>makeorder.js?a"></script>
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css?a">
+        <style type="text/css">
+  
+fieldset .btn2{
+   
+   
+    background: #b9cf6a;
+    background: rgba(255, 255, 255, .3);
+    border-color: #e3ebc3;
+    border-color: rgba(255, 255, 255, .6);
+    border-style: solid;
+    border-width: 2px;
+    -webkit-border-radius: 5px;
+    line-height: 30px;
+    list-style: none;
+
+    
+    width:45%;
+    text-align: center;
+    float:left;
+    margin-left: 3%;
+    
+}
+
+    </style>
+
+</head>
+<body>
+<header id="header" class="">
+   <a href="javascript:history.go(-1)" class="go_back"><</a> 收货地址管理
+</header><!-- /header -->
+
+<div id="payment" style="background:#cfc">
+
+    <fieldset>
+{if $address_list}
+{foreach $address_list as $v}
+
+<form action="/wap/order/add_address" method="post" >
+
+        <ol>
+
+ <li>
+    <label for="address">收件人：</label>
+    <input type="text"  name="consignee" value="<{$v.consignee}>" required>
+</li>
+<li>
+    <label for="postcode">联系电话：</label>
+    <input  name="tel" type="number" value="<{$v.tel}>" required>
+</li>
+
+<li>
+    <label for="country">详细地址：</label>
+    <textarea  name="address" type="text" required><{$v.address}></textarea>
+</li> 
+<li style="overflow: hidden">
+   <button type="submit" name="add" class="btn2" value="1">选择这个地址</button> <button type="submit" name="del" class="btn2" value="1">删除</button>
+</li> 
+
+        </ol>
+        <input type="hidden" name="postcode" value="<{$postcode}>">
+        <input type="hidden" name="province" value="<{$v.province}>">
+        <input type="hidden" name="city" value="<{$v.city}>">
+        <input type="hidden" name="district" value="<{$v.district}>">
+        <input type="hidden" name="rec_url" value="<{$rec_url}>">
+        <input type="hidden" name="address_id" value="<{$v.address_id}>">
+         <input type="hidden" name="is_wechat" value="<{$v.is_wechat}>">
+        </form>
+{/foreach}
+{/if}
+<form action="/wap/order/add_address" method="post"> 
+        <ol>
+
+            <li>
+    <label for="address">收件人：</label>
+    <input type="consignee" id="consignee" name="consignee"  required>
+</li>
+<li>
+    <label >联系电话：</label>
+    <input id="tel" name="tel" type="number" required>
+</li>
+  <li>
+    <label style="width:100%">选择区域：</label>
+    <select class="btn" onchange="changeCity(this,'city')" name="province" id="province">
+        <option value="0">选择省</option>
+        {foreach $provinces as $p}
+        <option value="<{$p.region_id}>"><{$p.region_name}></option>
+        {/foreach}
+    </select>
+    <select class="btn" id="city" onchange="changeCity(this,'district')" name="city">
+        <option value="0">选择市</option>
+    
+    </select>
+    <select  class="btn" id="district" name="district" >
+        <option value="0">选择区/县</option>
+    
+    </select>
+</li>
+<li>
+    <label for="country">详细地址：</label>
+    <textarea id="address" name="address" type="text" required></textarea>
+</li> 
+<li style="overflow: hidden">
+<input type="hidden" name="rec_url" value="<{$rec_url}>">
+<input type="hidden" name="postcode" value="<{$postcode}>">
+   <button type="submit" class="btn" style="width:80%;margin:0px auto;display:block">选择这个地址</button> 
+</li> 
+
+        </ol>
+        </form>
+    </fieldset>
+
+</div>
+    </body>
+</html>

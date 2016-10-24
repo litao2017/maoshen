@@ -1,0 +1,15 @@
+<script src="<{$Think.const.INDEX_JS_URL}>common.js" type="text/javascript"></script>
+<div id="header">
+  
+    <div class="header-main main flex flex-abw">
+      <a class="header-logo" href="/" title=""><img width="60px" src="<{$Think.const.INDEX_IMAGE_URL}>logo.png" alt=""></a>
+      <ul class="header-nav flex flex-abw">
+      		{foreach name="nav_list" item="nav" key="key"}
+        	<li><a class="header-nav-a" href="<{$nav.nav_url}>" {if $nav.type == 1}target="_blank"{/if}><{$nav.nav_name}></a></li>
+    		{/foreach}
+      		
+      
+              </ul>
+    </div>
+  </div>
+  <div class="header-blank"></div>

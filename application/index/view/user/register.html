@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="{$keywords}"/>
+<meta name="Description" content="{$description}"/>
+<title>注册</title>
+<style>
+*{padding:0;margin:0;}
+body{background:#f8f4d9;color:#000;font-size:14px;}
+ul{list-style:none;}
+a{text-decoration:none;color:#000;}
+#main{width:1100px;;margin:0 auto;}
+.reg{background:#f3f0eb;margin:10px 0px;text-align:center;border:1px solid #934948;height:1000px;position:relative;box-shadow:2px 2px 2px #a19a88;}
+
+table{border:1px solid #b77a75;margin:0 auto;background:#f8f4d9;height:650px;width:600px;font-weight:bold;margin-top:170px;padding:60px;box-shadow:2px 2px 2px #a19a88;}
+label{font-size:30px;font-weight:bold;}
+
+input{box-shadow:2px 2px 2px #a19a88;}
+.uname,.pwd,.rpwd,.email,.tel{background:#f8f4d9;height:35px;width:200px;border:1px solid #cba08d;}
+.btn{background:#e0dab6;color:#fff;width:100px;height:40px;font-size:30px;font-weight:bold;}
+.code{background:#f8f4d9;height:35px;width:100px;border:1px solid #cba08d;}
+.t2{text-align:left;}
+.t1{text-align:center;}
+
+.reproduct{border:1px solid #be847d;background:#fcfaee;}
+.reproduct_top{background:#81100c;height:25px;color:#FFF;position:relative;}
+.reproduct_top a{color:#fff;font-size:14px;display:inline-block;background:#9c2a2a;width:60px;line-height:25px;text-align:center;border-radius:3px;}
+.reproduct_top .more{position:absolute;right:25px;background:#c0575b;width:80px;}
+.reproduct_c{padding:5px;max-width:200px;margin:10px 5px 10px 0px;border:1px solid #c7c5bc;display:inline-block;}
+.reproduct_c img{width:200px;height:270px;}
+.reproduct_ul ul li{margin:2px 0;font-size:10px;}
+</style>
+<script src="/static/index/js/jquery.min.js"></script>
+<script>
+
+function chkstr(str)
+{
+  for (var i = 0; i < str.length; i++)
+  {
+    if (str.charCodeAt(i) < 127 && !str.substr(i,1).match(/^\w+$/ig))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+function check_password( password )
+{
+    if ( password.length < 6 )
+    {
+        $('#password_notice').html("密码太短");
+		
+		 return false;
+		
+    }else
+    {
+       $('#password_notice').html('');
+		 
+    }
+  
+}
+
+function check_conform_password( conform_password )
+{
+    password = $('#password').val();
+    
+    
+    if ( conform_password != password )
+    {
+       $('#conform_password_notice').html('两次密码不一样');
+		
+		
+		 return false;
+    }
+    else
+    {
+       $('#conform_password_notice').html('');
+		
+    }
+}
+
+function is_registered(username)
+{
+    
+	
+	var unlen = username.replace(/[^\x00-\xff]/g, "**").length;
+
+    if ( username == '' )
+    {
+       $('#username_notice').html("用户名不能为空");
+		
+		return false;
+    }
+	
+	if ( !chkstr( username ) )
+    {
+        $('#username_notice').html("格式不正确");
+		
+		return false;
+    }
+	
+    if ( unlen < 3 )
+    { 
+       $('#username_notice').html("用户名太短");
+		 
+    $('.btn').attr('disabled',true);
+	
+		return false;
+    }
+    if ( unlen > 20 )
+    {
+        $('#username_notice').html("太长");
+		
+		return false;
+    }
+     
+	
+	$.post("/index/user/is_registered", {username:username},
+   function(data){
+	 
+		$('#username_notice').html(data); 
+		     
+   }, "text");
+   	
+   
+}
+
+
+
+function checkEmail(email)
+{
+
+	$.post("/index/user/checkEmail", {email: email},
+   function(data){
+     
+			 
+			$('#email_notice').html(data); 	 
+			 
+			
+   }, "text");
+	
+	
+	
+	
+	}
+
+
+function checkTel(tel){
+	
+	
+	   if(!(/^1[3|4|5|7|8]\d{9}$/.test(tel))){ 
+	
+
+		$('#tel_notice').html("格式不正确");
+     
+		return false;
+	
+		}
+	
+	
+	$.post("/index/user/checkTel", { tel:tel },
+   function(data){
+    
+		$('#tel_notice').html(data); 
+		
+   }, "text");
+	
+}
+
+$(function(){
+$('.btn').click(function(){
+	
+	msg = $('.t2 span').text();
+	
+	if(!msg){
+		
+		
+		
+		return true;
+		
+		
+		}else{
+			
+			alert('请正确填写信息');
+			
+			return false;
+			
+			
+			
+			}
+	
+	
+	
+	})
+})
+</script>
+
+</head>
+<body>
+{include file="public/header"}
+<div id="main">
+	<div class="reg">
+    	<form method="post" name="formUser" action="">
+        	<table>
+            	<tr>
+                	<td><label for="">用户账号：</label></td>
+                    <td class="t2"><input class="uname" name="username" onblur="is_registered(this.value);" type="text"><span id="username_notice" style="color:#FF0000"></span></td>
+            	</tr>               	
+            	<tr>
+                	<td><label for="">用户密码：</label></td>
+                    <td class="t2"><input class="pwd" id="password" name="password" onblur="check_password(this.value);"  type="password"><span style="color:#FF0000" id="password_notice"></span></td>
+            	</tr>
+                <tr>
+                	<td><label for="">确认密码：</label></td>
+                    <td class="t2"><input class="rpwd" id="confirm_password" name="confirm_password" onblur="check_conform_password(this.value);" type="password"><span style="color:#FF0000" id="conform_password_notice"></span></td>
+            	</tr>
+                <tr>
+                	<td><label for="">电子邮箱：</label></td>
+                    <td class="t2"><input class="email" onblur="checkEmail(this.value);" name="email" type="email" required><span style="color:#FF0000" id="email_notice"></span></td>
+            	</tr>
+                <tr>
+                	<td><label for="">手机号码：</label></td>
+                    <td class="t2"><input class="tel" onblur="checkTel(this.value);" name="mobile" type="tel" required><span style="color:#FF0000" id="tel_notice"></span></td>
+            	</tr>
+                <!--<tr>
+                	<td><label for="">验证码：</label></td>
+                    <td class="t2"><input class="code" name="code" type="text">（发送至手机）</td>
+            	</tr>-->
+            
+            	<tr>
+                	<td class="t1" colspan="2"> <input class="btn" name="submit" type="submit" value="注 册"></td>
+                    
+            	</tr>
+      			
+            </table>
+    	</form>
+    
+    
+    
+    </div>
+
+
+
+
+
+
+		
+
+	
+	 <div class="reproduct">
+    	<div class="reproduct_top">
+             	<a href="">向您推荐</a>
+                <a class="more" href="/index/goods/mall_center">更多>>></a>
+        </div>
+        
+        {foreach name="best_goods" item="goods"}
+        <a href="/index/goods/goods_info/goods_id/<{$goods.goods_id}>" title="<{$goods.goods_name}>">
+    	<div class="reproduct_c">
+        	<img src="<{$goods.goods_src}>" alt="<{$goods.goods_name}>">
+            <div class="reproduct_ul">
+            	<h5><{$goods.name}></h5>
+            	<ul>
+                	<li>价 格：<span {if $goods.promote_price != 0}style="text-decoration:line-through;"{/if}><{$goods.goods_price}>/元</span></li>
+                    <li style="color:red;">促销价：{if $goods.promote_price != 0}
+          <{$goods.promote_price}>/元
+          {else}
+         无
+          {/if}</li>
+                    <li>五行分类：<{$goods.cate_name}></li>
+                </ul>
+            </div>
+        </div>
+        </a>
+         {/foreach} 
+       
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>产品中心 - 猫神 —分享电商领导者！ -  </title>
+  <meta name="format-detection" content="telephone=no, address=no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="keywords" content="分享电商,微信公众号,微商,互联网+,分销系统,微店通" />
+  <meta name="description" content="以分享经济的模式帮助传统零售企业进行互联网+转型。实现O2O营销、供应链管理、链接消费者等经营需求。" />
+   <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>style.css" />
+  <script src="<{$Think.const.INDEX_JS_URL}>jquery.min.js" type="text/javascript"></script>
+  <!--[if lte IE 9]>
+      <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>ieCss.css" />
+    <![endif]-->
+    <script language="javascript">
+    function killErrors()
+    {
+      return true;
+    }
+    window.onerror = killErrors;
+    </script>
+</head>
+<body>
+<!--通用头部 start-->
+ {include file="public/header" /} 
+
+  <!-- 通用头部 end -->
+<!--.container start -->
+<div class="container">        	
+	    <div class="banner" style=" background-image:url(<{$Think.const.INDEX_IMAGE_URL}>f919a7c038edd82aaf7653c5664920a1.jpg)">
+    	<img class="banner-img" src="<{$Think.const.INDEX_IMAGE_URL}>banner_blank400.jpg" alt="">
+    </div>
+        <ul class="bzproduct">
+        
+        		{foreach $pro_list as $pro}
+        
+        
+    		    	<li class="bzproduct-list">
+	    		<div id="msproduct<{$pro.pro_id}>" class="bzproduct-anchor"></div>
+	    		<div class="bzproduct-main">
+		    		<dl class="bzproduct-table">
+		    			<dt class="bzproduct-icon"><img src="<{$pro.image}>" alt="<{$pro.name}>"></dt>
+		        		<dd class="bzproduct-bd">
+		        			<div class="bzproduct-title"><{$pro.name}></div>
+		        			<div class="bzproduct-text"><p>
+	<{$pro.content}>
+</p>
+<p>
+	<br />
+</p></div>
+		        		</dd>
+		        	</dl>
+		        </div>
+	    	</li>
+        	    	
+            {/foreach}        
+                    
+                    
+            </ul>
+</div>
+<!--.container end -->
+	
+<!--通用尾部 start-->
+ {include file="public/footer" /} 
+
+<!--通用尾部 end-->
+
+</body>
+</html>

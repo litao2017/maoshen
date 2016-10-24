@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>自定义二维码昵称</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+
+
+
+
+
+<ul class="bd_type">
+    <li style='width:100%' class="currnet">自定义二维码昵称</li>
+   
+
+ </ul>
+
+
+
+<section>
+<form id="payment"  onsubmit="return checkForm()" method="get" action="/wap/user/get_qrcode">
+
+
+    <fieldset>
+    
+           <ol>
+            <li>
+             <label >二维码昵称：</label>
+   <input type="text" name="name" value="" placeholder="不填默认微信昵称" id="name">
+
+                 </li>
+         <li>
+           注：只有一次机会，昵称确认后不能修改，可以使用自己的姓名更利于推广
+
+                 </li>
+              
+                 </ol>
+                 <button type="submit" class="btn" style="width:80%;display:block" name="">使用昵称</button>
+    </fieldset>
+    </form>
+  <div>
+  <h3 style="text-align: center">样式</h3>
+    <img src="<{$Think.const.WAP_IMAGE_URL}>qrcode.jpg" alt="" style="width:300px;display:block;margin:10px auto">
+  </div>
+</section>
+<script type="text/javascript">
+  function checkForm(){
+    var name=document.getElementById("name").value;
+    if(!name){
+      document.getElementById("name").value='user_nickname';
+    }
+}
+
+</script>
+{include file="public/footer_ewm" /}
+</body>

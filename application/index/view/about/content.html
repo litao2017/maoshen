@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><{$article_info.title}>_<{$config.title}></title>
+  <meta name="format-detection" content="telephone=no, address=no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-touch-fullscreen" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="keywords" content="<{$config.keywords}>" />
+  <meta name="description" content="<{$config.description}>" />
+  <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>style.css" />
+  <script src="<{$Think.const.INDEX_JS_URL}>jquery.min.js" type="text/javascript"></script>
+   
+  <!--[if lte IE 9]>
+      <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>ieCss.css" />
+    <![endif]-->
+    <script language="javascript">
+   	$(function(){
+		//name=$(".on").text();
+		
+		//$("title").text(name);
+		})
+   
+    </script>
+    <style>
+    
+		.rightBox {
+    min-height:550px;
+}	
+	.map{padding:0 0 10px}
+	
+	.map img{max-width:100%;}
+	
+	
+	</style>
+</head>
+<body>
+<!--通用头部 start-->
+  {include file="public/header"/}
+  <!-- 通用头部 end -->
+<!--.container start -->
+<div class="container">
+           <!-- <div class="banner" style=" background-image:url(<{$Think.const.INDEX_IMAGE_URL}>c5fa88a2be8e7933ce3ede9ead93d793.jpg)">
+        	<img class="banner-img" src="<{$Think.const.INDEX_IMAGE_URL}>banner_blank.jpg" alt="<{$cate.cate_name}>">
+        </div>-->
+        <div class="blank30"></div>
+    <div class="main clearfix">
+        <div class="sideBox">
+							<a class="sideBox-nav" href="">
+			<div class="sideBox-title"><{$nav_name}></div>
+			<div class="sideBox-subtitle opacity4">about us</div>
+		</a>
+		<div class="sideBox-list">
+        				{foreach $list as $article}	
+                        
+                           <a class="sideBox-list-a {if $article_info.title==$article.title}on{/if}" href="<{:real_url('about',$is_html,'',$article.about_id)}>"><{$article.title}></a> 
+                            
+                        {/foreach}    
+	      					
+	      			</div>
+    </div>       
+    <div class="rightBox">
+    		<div class="bzabout">
+    			<!-- <h2 class="bzabout-title"></h2> -->
+    			<div class="bzabout-article">
+                
+                {if $article_info.map}
+                	<div class="map"><img src="<{$article_info.map}>"></div>
+                {/if}
+                
+				　<{$article_info.content|htmlspecialchars_decode}>
+	
+    			</div>
+            </div>
+    </div>            
+    <div class="blank30"></div>
+</div>
+</div>
+<!--.container end -->
+<!--通用尾部 start-->
+{include file="public/footer" /}
+<!--通用尾部 end-->
+
+</body>
+</html>

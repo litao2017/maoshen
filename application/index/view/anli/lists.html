@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><{$cate_info.cate_name}>_<{$config.title}></title>
+
+  <meta name="keywords" content="<{$config.keywords}>" />
+  <meta name="description" content="<{$config.description}>" />
+
+  <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>style.css" />
+  <script src="<{$Think.const.INDEX_JS_URL}>jquery.min.js" type="text/javascript"></script>
+  <!--[if lte IE 9]>
+      <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>ieCss.css" />
+    <![endif]-->
+
+</head>
+<body>
+<!--通用头部 start-->
+  {include file="public/header" /} 
+  <!-- 通用头部 end -->
+<!--.container start -->
+<div class="container">
+      
+        <div class="blank30"></div>
+    <div class="main clearfix">
+		<div class="sideBox">
+				<a class="sideBox-nav" href="pic-4.html">
+			<div class="sideBox-title">案例中心</div>
+			<div class="sideBox-subtitle opacity4">case</div>
+		</a>
+		<div class="sideBox-list">
+        					
+        		{foreach $cate_list as $cate}
+	      					<a class="sideBox-list-a {if $cate_info.cate_name==$cate.cate_name}on{/if}" href="<{:real_url('anli',$is_html,$cate.cate_id)}>"><{$cate.cate_name}></a>
+	      					
+                            
+                      {/foreach}      
+                            
+	      			</div>
+    			</div>        <div class="rightBox">
+        	<ul class="bzcase clf">
+            			
+                        {foreach $anli_list as $anli}
+                        
+                        		<li class="bzcase-list">
+        			<div class="bzcase-list-hd">
+        				<div class="bzcase-list-logo">
+                                                            <img alt="<{$anli.anli_name}>" src="<{$anli.logo}>">
+                                    				</div>
+        				<div class="bzcase-list-text">
+        					<div class="bzcase-list-title"><{$anli.anli_name}></div>
+        					<div class="bzcase-list-subtitle"><{$anli.content}></div>
+        				</div>
+        			</div>
+        			<div class="bzcase-list-bd">
+        				<div class="bzcase-list-img">
+        					<img src="<{$anli.image}>" alt="<{$anli.anli_name}>" />
+        				</div>
+        				<div class="bzcase-list-ewm">
+                                                            <img alt="<{$anli.anli_name}>" src="<{$anli.qrcode}>">
+                                    				</div>
+        			</div>
+        		</li>
+                  {/foreach}      	
+                            
+                            </ul>
+            <div class="pgs xiaoyu_pgs clf">
+                <div class="pg">
+        <div class="dux-page">
+          		<{$html_page}>
+        </div></div>
+            </div>
+        </div>
+    </div>
+    <div class="blank30"></div>
+</div>
+<!--.container end -->
+
+<!--通用尾部 start-->
+{include file="public/footer" /} 
+<!--通用尾部 end-->
+
+</body>
+</html>

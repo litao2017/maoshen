@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>导航设置</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+      
+   <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css">
+        <script src="<{$Think.const.VENDOR_URL}>kindeditor/kindeditor.js" type="text/javascript" charset="utf-8" ></script>
+<script type="text/javascript" charset="utf-8" src="<{$Think.const.VENDOR_URL}>kindeditor/lang/zh_CN.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>bootstrap.min.js"></script>
+<style type="text/css">
+.input-group{
+  margin-top:10px;
+}
+.input-group .w100{
+  width:100px;
+}
+.input-group .w200{
+  width:200px;
+}
+.input-group .w300{
+  width:300px;
+}
+.btn-group{
+ display:block;
+  margin:0px auto;
+  height:50px;
+}
+.btn-group>.btn:first-child{
+  float:none;
+    display:block;
+  margin:0px auto;
+
+}
+</style>
+    </head>
+
+    <body>
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+    window.editor = K.create('#editor_id');
+    });
+</script>
+<div class="panel panel-info">
+  <!--<div class="panel-heading">当前位置是：导航设置</div>-->
+  <div class="panel-body">
+  <form action="/index.php/admin/config/nav_set" method="post">
+
+ <ul class="nav nav-tabs" role="tablist" id="feature-tab">
+        <li class="active"><a href="#tab-config" role="tab" data-toggle="tab">导航设置</a></li>
+
+      
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab-config">
+
+        
+           <div class="input-group"><span class="input-group-addon " id="basic-addon1">导航名</span><input name="nav_name" type="text" class="form-control w200" placeholder="" aria-describedby="basic-addon1" value="<{$nav.nav_name}>"></div>
+            <div class="input-group"><span class="input-group-addon " id="basic-addon1">上级导航</span><select name="nav_pid"  class="form-control w200"  aria-describedby="basic-addon1" >
+            
+            <option value="0">顶级导航</option>
+            {foreach $nav_list as $na}
+                
+                 <option {if $nav.nav_pid==$na.nav_id}selected{/if} value="<{$na.nav_id}>"><{$na.nav_name}></option>
+                
+            {/foreach}
+            </select></div>
+           <div class="input-group"><span class="input-group-addon " id="basic-addon1">跳转</span><select name="type"  class="form-control w200"  aria-describedby="basic-addon1" ><option value="0" {if $nav.type=="0"}selected{/if}>当前窗口</option><option value="1" {if $nav.type=="1"}selected{/if}>新窗口</option></select></div>
+          <div class="input-group"> <span class="input-group-addon " id="basic-addon1">链接</span><input name="nav_url" type="text" class="form-control w300" placeholder="" aria-describedby="basic-addon1" value="<{$nav.nav_url}>"></div>
+           <div class="input-group"><span class="input-group-addon " id="basic-addon1">排序</span><input name="sort" type="text" class="form-control w100" placeholder="" aria-describedby="basic-addon1" value="<{$nav.sort}>"></div>
+           <div class="input-group"><span class="input-group-addon " id="basic-addon1">是否显示</span><select name="is_show"  class="form-control w100"  aria-describedby="basic-addon1" ><option value="1" {if $nav.is_show=="1"}selected{/if}>是</option><option value="0" {if $nav.is_show=="0"}selected{/if}>否</option></select></div>
+    		
+          
+        
+        
+
+        </div>
+      
+    </div>
+
+    
+ 
+ <input type="hidden" name="nav_id" value="<{$nav.nav_id}>">
+ <br>
+  <div class="btn-group" role="group"><input type="submit" class="btn btn-primary" value="确认保存"></div>
+  </form>
+
+   </div>
+</div>
+
+       
+
+    </body>
+</html>

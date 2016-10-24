@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台首页</title>
+
+<link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>index1.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery.min.js"></script>
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>tendina1.min.js"></script>
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>common1.js"></script>
+
+<style>
+
+.selected ul .on{
+   
+    color: #000!important;
+	
+	background: #eee;
+	
+	}
+
+</style>
+<script>
+$(function(){
+	
+	
+	
+    $(".childUlLi ul li a").click(function(){  
+        
+	 $(this).addClass('on');
+	 
+	  $(this).parent().siblings().find('a').removeClass('on');
+	  
+	   $(this).parent().parent().parent().siblings().find('a').removeClass('on');
+	  
+	  location1 = $(this).parent().parent().parent().find('a:first').text();
+	    
+ 
+	  location2 = $(this).text();
+	 
+	  $(".route_bg a:first").html(location1+"<i class='glyph-icon icon-chevron-right'>");
+	 
+	   $(".route_bg a:eq(1)").html(location2);
+   	 
+	}); 
+
+	
+	
+	
+	})
+
+
+</script>
+</head>
+<body>
+    <!--顶部-->
+    <div class="layout_top_header">
+            <div style="float:left"><span style="font-size: 16px;line-height: 45px;padding-left: 20px;color:#CCC">神管理后台</span></div>
+                <div style="float:left;margin-left: 150px;"><a style="font-size: 16px;line-height: 45px;padding-left: 20px;color:#CCC" href="/admin/html/tran_index" target="menuFrame">生成首页html</a></div>
+                  <div style="float:left;margin-left: 50px;"><a style="font-size: 16px;line-height: 45px;padding-left: 20px;color:#CCC" href="/admin/html/html" target="menuFrame">生成html</a></div>
+            <div id="ad_setting" class="ad_setting">
+                <a class="ad_setting_a" href="javascript:; ">
+                    <i class="icon-user glyph-icon" style="font-size:20px;color:#ccc"></i>
+                    <span style="color:#CCC"><{$Think.session.admin_name}></span>
+                    <i class="icon-chevron-down glyph-icon"></i>
+                </a>
+                <ul class="dropdown-menu-uu" style="display: none" id="ad_setting_ul">
+                	<li class="ad_setting_ul_li"> <a href="/index/index/" target="_blank"><i class="glyphicon glyphicon-home"></i>  网站首页 </a> </li>
+                    
+                    <li class="ad_setting_ul_li"> <a href="/admin/index/clear_temp"><i class="glyphicon glyphicon-trash"></i>  清除缓存 </a> </li>
+                    
+                    <li class="ad_setting_ul_li"> <a href="/admin/index/logout"><i class="icon-signout glyph-icon"></i> <span class="font-bold">退出</span> </a> </li>
+                </ul>
+                 
+            </div>
+          
+    </div>
+    <!--顶部结束-->
+    <!--菜单-->
+    <div class="layout_left_menu">
+        <ul id="menu">
+            <!--<li class="childUlLi opened  selected">
+            
+               <a href="/admin/index/info"  target="menuFrame"><i class="glyph-icon icon-home"></i>后台首页</a>
+                <ul>
+
+                </ul>
+            </li>-->
+                
+        	 {foreach $menu_list as  $val}
+            <li class="childUlLi">
+                <a href="javascript:;"> <i class="glyph-icon icon-reorder"></i><{$val.menu_name}></a>
+                <ul>
+                 {foreach $val.child as  $child}
+                   <li><a href="/admin/<{$child.menu_c}>/<{$child.menu_a}>" target="menuFrame"><i class="glyph-icon icon-chevron-right"></i><{$child.menu_name}></a></li>
+                   
+                      {/foreach}   
+                </ul>
+            </li>
+            {/foreach}    
+        
+        </ul>
+    </div>
+    <!--菜单-->
+    <div id="layout_right_content" class="layout_right_content">
+
+        <div class="route_bg">
+            <a href="javascript:;">首页</a>
+            <a href="javascript:;"></a>
+        </div>
+        <div class="mian_content">
+            <div id="page_content">
+                <iframe id="menuFrame" name="menuFrame" src="/admin/index/info" style="overflow:hidden;"
+                        scrolling="yes" frameborder="no" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="layout_footer">
+        <p>Copyright © 2016 - 猫神科技</p>
+    </div>
+</body>
+</html>

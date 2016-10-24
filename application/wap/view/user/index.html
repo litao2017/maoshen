@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>个人中心</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="litao">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css?d">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+header{
+    background:url(<{$Think.const.WAP_IMAGE_URL}>123.jpg);
+    background-size:cover;
+    padding:15px 0px;
+}
+.section .ul_item li{
+  font-weight: 100;
+}
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+<!-- <div class="notice">&nbsp;&nbsp<span onclick="closeNotice()" >×</span></div>
+<script>  
+function closeNotice(){
+    var notice=document.getElementsByClassName('notice')[0];
+    notice.parentNode.removeChild(notice);
+} -->
+</script>
+<header>
+<div id="header_idv">
+    
+
+   <img src="<{$user_info.headimgurl}>">    <div>
+        <p>会员号：<{$user_info.user_name}></p>
+        <p>会员昵称： <{$user_info.nickname}></p>
+        <p>会员等级： <{$user_info.level_name}><font style="color:#3c6"></font></p>
+        <p>推荐人ID：{if $parent_info}<{$parent_info.user_name}>&nbsp;-&nbsp;<{$parent_info.nickname}>{else}官方推荐{/if}</p>
+    </div>
+    </div>
+</header>
+<section>
+{if $user_info.user_level >0} 
+    <div class="info">
+
+  <div><p>团队</p><p><{$user_info.tuan_money}></p></div>
+    <div><p>我的推广</p><p><{$user_info.all_fencheng}></p></div>
+   <div><p>待确认</p><p><{$user_info.nosure_fencheng}></p></div>
+    <div><p>可用<{$shop_config.unit}></p><p><{$user_info.sure_fencheng}></p></div>
+ 
+
+
+</div> 
+{/if}
+<!--    <ul class="ul_nav">
+     <li><a href="/index.php/wap/order"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_1.jpg"><p>待付款</p></a></li>
+     <li><a href="user.php?act=my_order&s=1"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_2.jpg"><p>待收货</p>{if $dsh_num}<span class="dsh_num">{$dsh_num}</span>{/if}</a></li>
+     <li><a href="user.php?act=address_list"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_3.jpg"><p>收货地址</p></a></li>
+     <li><a href="user.php?act=profile"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_4.jpg"><p>个人资料</p></a></li>
+ </ul> -->
+     {if $shop_config.notice} <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+      <li class="noicon"><marquee direction='left'><{$shop_config.notice}></marquee></li>
+       </ul>{/if}
+
+      <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+<!--    {if $user_info.user_level < 1 || $user_info.user_id==1}   <li onclick="location.href='/wap/order/order_test'" style="color:red">申请试用</li> {/if} -->
+    
+      {if $user_info.user_level < 1} 
+<!--  <li onclick="alert('您还没有购买成为会员，暂不能使用二维码')">我的二维码</li> -->
+      {else}
+      <!-- <li onclick="location.href='/wap/user/get_qrcode'">我的二维码</li> -->
+      {/if}
+
+     <!--   {if $user_info.user_level == 1}   <li onclick="location.href='/wap/user/up_level'">合伙人升级</li> {/if} -->
+       <li onclick="location.href='/wap/message/'">私信&nbsp;&nbsp;<font><{$message_num}></font></li>
+    </ul>
+     <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+ 
+    
+       
+      <li onclick="location.href='/wap/order/'">我的订单</li>
+      <li onclick="location.href='/wap/order/address/is_rec/1'">收货地址管理</li>
+      {if $dsh_num}<li onclick="location.href='/wap/order/index/s/2'" class="other_li">待收货&nbsp;&nbsp;<font><{$dsh_num}></font></li>{/if}
+       {if $dpl_num}<li onclick="location.href='/wap/order/index/s/3'" class="other_li">待评论&nbsp;&nbsp;<font><{$dpl_num}></font></li>{/if}
+    </ul>
+ <!--   <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+  
+ <li onclick="location.href='user.php?act=profile'">团队：<font style="font-size: 16px">895411</font></li>
+   <li onclick="location.href='#'">推广额：<font style="font-size: 16px">895411</font></li>
+   <li onclick="location.href='user.php?act=message_list'">已确认：<font style="font-size: 16px">895411</font>未确认：<font style="font-size: 16px">895411</font></li>
+   <li style="height:20px;line-height: 20px;color:#ccc">去提现（可提500）</li>
+  </ul> -->
+  {if $user_info.user_level > 1} 
+  <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc;">
+
+ 
+     {if $tuan_num}<li onclick="location.href='/wap/tuan/index/'" >我推荐的团队：<font style="font-size: 16px"><{$tuan_num}></font>团队</li>{/if}
+       
+      <li onclick="location.href='/wap/user/fans/level/1'"><{$shop_config.level_name_1}>：<font style="font-size: 16px"><{$fans_info.fans1_num}></font></li>
+        <li onclick="location.href='/wap/user/fans/level/2'"><{$shop_config.level_name_2}>：<font style="font-size: 16px"><{$fans_info.fans2_num}></font></li>
+        <li onclick="location.href='/wap/user/fans/level/3'"><{$shop_config.level_name_3}>：<font style="font-size: 16px"><{$fans_info.fans3_num}></font></li>
+        <li class="other_li noicon">团队人数：<{$fans_info.fans_all_num}></li>
+    </ul>
+    {/if}
+      <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+   
+    
+   <li onclick="location.href='/wap/user/user_info/'">个人资料</li>
+   <li  onclick="location.href='/wap/article/content/id/4'" style="display:none">帮助中心</li>
+     {if $user_info.user_level > 0} 
+     <li onclick="location.href='/wap/money/'">提现</li>
+      {/if}
+  
+ </ul>
+</section>
+{include file="public/footer_gr" /}
+</body>

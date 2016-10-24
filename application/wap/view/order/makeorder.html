@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>提交订单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>jquery-1.9.1.min.js"></script>
+   <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>makeorder.js?a"></script>
+  <link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css?c">
+  <link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+    <style type="text/css">
+
+
+
+    </style>
+
+
+
+
+
+</head>
+<body onload="loadDiv.style.display='none';">
+  <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+<header>
+    <a href="javascript:history.go(-1)" class="go_back"><</a> 提交订单
+</header><!-- /header -->
+<form id="payment"  onsubmit="return checkForm()" method="post" action="/wap/order/addorder">
+ <input type="hidden" name="postcode"  value="<{$postcode}>">
+
+    <fieldset>
+        <legend>选择商品数量</legend>
+           <ol>
+            <li style="overflow:hidden;">
+        <span class="goods_img"><img src="<{$goods_info.goods_src}>" alt=""><font><{$goods_info.goods_name}></font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="txt"> 
+          <button type="button" class="decrease" onclick="changenum(-1)">-</button>
+                        <input class="num" type="number" min="1" max="1000" name="goods_number" id="goods_number" value="1" size="4" onkeyup="changenum(0)" style="width:50px;border:0;padding:0px">
+            <button type="button" class="increase" onclick="changenum(1)">+</button>
+        <input type="hidden" name="price" id="price" value="<{$goods_info.goods_price}>">
+        <input type="hidden" name="goods_id"  value="<{$goods_info.goods_id}>">
+            <script>
+   
+    
+      
+      </script>
+             
+            </span>
+                 </li>
+                 </ol>
+    </fieldset>
+    <div class="line">  </div>
+    <fieldset>
+        <legend>选择送货地址</legend>
+ 
+       
+{if $address_info}
+ <ol>
+          <li class="has_choose"  onclick="location.href='/wap/order/address/is_rec/1'">
+    <p><{$address_info.consignee}> &nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;font-size: 16px;"><{$address_info.tel}></font></p>
+    <p><{$address_info.address}></p>
+    <input type="hidden" name="address_id" value="<{$address_info.address_id}>" placeholder="">
+</li>
+{else}
+       {if $show_addrSign}   <button type="button" class="btn" style="width:80%;display:block" id="editAddress">使用微信地址</button>{/if}
+        <ol>
+  <li >
+    <label >收件人：</label>
+    <input type="text" id="consignee"  required name="consignee">
+      <input type="hidden" name="is_wxadress"  value="0">
+</li>
+<li>
+    <label >联系电话：</label>
+    <input id="tel" name="tel" type="number" required >
+</li>
+  <li id="choose_area">
+    <label style="width:100%">选择区域：</label>
+    <select class="btn" onchange="changeCity(this,'city')" name="province" id="province">
+        <option value="0">选择省</option>
+        {foreach $provinces as $p}
+        <option value="<{$p.region_id}>"><{$p.region_name}></option>
+        {/foreach}
+    </select>
+    <select class="btn" id="city" onchange="changeCity(this,'district')" name="city">
+        <option value="0">选择市</option>
+    
+    </select>
+    <select  class="btn" id="district" name="district" >
+        <option value="0">选择区/县</option>
+    
+    </select>
+</li>
+<li>
+    <label for="country">详细地址：</label>
+    <textarea id="address" name="address" type="text" required></textarea>
+</li> 
+{/if}
+<li>
+    <label for="country">订单备注：</label>
+    <textarea id="note" name="note" type="text" placeholder="您有什么需求，写在这里"></textarea>
+</li>
+        </ol>
+    </fieldset>
+      <div class="line">  </div>
+    <fieldset>
+        <legend>支付方式</legend>
+        <ol>
+            <li>
+                <fieldset>
+               
+                    <ol>
+                        <li>
+                          
+                            <button onclick="changePay(1)" class="btn current" type="button" style="width:100px;padding:0px">微信支付</button>
+                        </li>
+                  
+                    </ol>
+                </fieldset>
+            </li>
+    
+        </ol>
+    </fieldset>
+      <div class="line">  </div>
+    <fieldset>
+    <span class="heji">合计： &nbsp;&nbsp;<font>￥<font id="all_price"></font></font></span>
+    </fieldset>
+    <fieldset>
+    <input type="hidden" name="pay_type" value="1" id="pay">
+        <button type="submit" class="btn" style="width:80%;display:block">提交订单</button>
+       
+    </fieldset>
+</form>
+<style type="text/css" media="screen">
+    #smark{
+        width:100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.3;
+        position: fixed;
+        top:0px;
+        left: 0px;
+        z-index: 100;
+        display: none;
+    }
+    .dig{
+        width:80%;
+        text-align: center;
+        height:50px;
+        line-height: 50px;
+        margin:  200px 10%;
+        background: rgba(255, 255, 255, .5);
+        color:#fff;
+    }
+</style>
+<div id="smark"><div class="dig"></div></div>
+<script>
+    changenum(0);
+
+function ltAlter(msg,fun){
+    $(".dig").html(msg);
+    $("#smark").fadeIn(400);
+    setTimeout(function(){
+        $("#smark").fadeOut(400);
+        if(fun)
+            fun();
+    }, 1500)
+}
+{if !$address_info}
+function checkForm(){
+    var address=$.trim($("#address").val());
+    var tel=$.trim($("#tel").val());
+    var consignee=$.trim($("#consignee").val());
+/*    var province=$("#province").val();
+    var city=$("#city").val();
+    var district=$("#district").val();*/
+    if(consignee==""){
+        ltAlter('收件人不能为空');
+        return false;
+    }
+    if(tel==""){
+        ltAlter('电话不能为空');
+        return false;
+    }
+    if(address==""){
+        ltAlter('详细地址不能为空');
+        return false;
+    }
+ var re=/^\d{11}$/;
+if(!re.test(tel)){
+  alert('请填写11位的手机号码');
+  return false;
+}
+    return true;
+}
+
+{/if}
+</script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+
+  wx.config({
+    debug: false,
+    appId: '<{$signPackage.appId}>',
+    timestamp: '<{$signPackage.timeStamp}>',
+    nonceStr: '<{$signPackage.nonceStr}>',
+    signature: '<{$signPackage.signature}>',
+    jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage' 
+    ]
+  });
+ wx.ready(function () {
+    //监听“分享给朋友”
+    wx.onMenuShareAppMessage({
+      title: '<{$goods_info.goods_name}>',
+      desc: '<{$goods_info.goods_name}>',
+      link: '<{$url}>',
+      imgUrl: '<{$site_url}><{$goods_info.goods_src}>',
+
+      success: function (res) {
+  
+      },
+
+    });
+
+    //分享到朋友圈
+    wx.onMenuShareTimeline({
+      title: '<{$goods_info.goods_name}>',
+      link: '<{$url}>',
+      imgUrl: '<{$site_url}><{$goods_info.goods_src}>',
+
+      success: function (res) {
+    
+      },
+  
+  
+    });
+
+
+});
+{if $show_addrSign}
+//使用微信收货地址
+ $('#editAddress').click(function(){
+            getaddr();
+        });
+        function getaddr(){
+            WeixinJSBridge.invoke('editAddress',{
+                "appId" : "<{$addrSign.appId}>",
+                "scope" : "jsapi_address",
+                "signType" : "sha1",
+                "addrSign" : "<{$addrSign.addrSign}>",
+                "timeStamp": "<{$addrSign.timeStamp}>",
+                "nonceStr" : "<{$addrSign.nonceStr}>",
+            },function(res){
+               
+                if(res.err_msg == 'edit_address:ok'){
+                     $('#choose_area').hide();
+                        $('#consignee').val(res.userName);
+                    $('#tel').val(res.telNumber);            
+                    $('#address').val(res.proviceFirstStageName+res.addressCitySecondStageName+res.addressCountiesThirdStageName+res.addressDetailInfo);
+                    $('#is_wxadress').val(1);
+                }
+            });
+        }
+
+{/if}
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://mbwz323.wezhan.cn/xwzx -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+
+
+    <title>新闻资讯</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <link rel="stylesheet" href="<{$static}>base.pc.css?a" type="text/css">
+        <link href="<{$static}>iconfontV2.css" rel="stylesheet">
+        <link rel="stylesheet" href="<{$static}>RenderRunTimeCss3" type="text/css">
+    
+
+    <script type="text/javascript" src="<{$static}>jquery-1.9.1.min.js" style="color: rgb(0, 0, 0);"></script>
+    <script type="text/javascript" src="<{$static}>jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<{$static}>public.common.min.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.lazyload.min.js"></script>
+
+        <script type="text/javascript" src="<{$static}>underscore.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.slider.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.color.js"></script>
+<script type="text/javascript" src="<{$static}>jquery.mjs.nestedSortable.js"></script>
+<script type="text/javascript" src="<{$static}>searchExt.js"></script>
+
+
+
+
+    <script type="text/javascript" src="<{$static}>velocity.min.js"></script>
+    <script type="text/javascript" src="<{$static}>velocity.ui.min.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.validatestar.min.js"></script>
+
+    
+</head>
+<body>
+       
+        <script type="text/javascript">
+            (function($) {
+                $.extend({
+                    request: function(m) {
+                        var sValue = location.search.match(new RegExp("[\?\&]" + m + "=([^\&]*)(\&?)", "i"));
+                        return sValue ? sValue[1] : sValue;
+                    },
+                    urlUpdateParams: function(url, name, value) {
+                        var r = url;
+                        if (r != null && r != 'undefined' && r != "") {
+                            value = encodeURIComponent(value);
+                            var reg = new RegExp("(^|)" + name + "=([^&]*)(|$)");
+                            var tmp = name + "=" + value;
+                            if (url.match(reg) != null) {
+                                r = url.replace(eval(reg), tmp);
+                            } else {
+                                if (url.match("[\?]")) {
+                                    r = url + "&" + tmp;
+                                } else {
+                                    r = url + "?" + tmp;
+                                }
+                            }
+                        }
+                        return r;
+                    }
+                });
+            })(jQuery);
+            $(function() {
+                $(".deviceSwitch").find("div[data-device=pc]").addClass("active");
+                $(".deviceSwitch").find("div").not(".active").click(function() {
+                    if (window.location.pathname == "/") {
+                        window.location.href = window.location.origin + "?forceprev=mobile&setprev=mobile";
+                    }else{
+                        var mobileUrl = "http://" + window.location.host + "/prevmobilepage/37674"+window.location.search;
+                        window.location.href = $.urlUpdateParams(mobileUrl, "setprev", $(this).attr("data-device"));
+                    }
+                });
+            });
+        </script>
+    <div id="view_layout_1_843" class="mainSamrtView yibuSmartViewMargin">
+<div class="yibuFrameContent layout_Block2_Item0" style="border-style:none;">
+       <style type="text/css">
+
+ .header,.main-wrap .main,.footer { position:relative; clear:both; margin:0 auto; padding:0;}
+ .main-wrap { clear:both; margin:0; padding:0; width:auto; }
+ .main-wrap .main {}
+
+.main-wrap .main .content { width:100%;}
+
+body{
+background-color:;
+
+}
+</style>
+
+ {include file="tpl/tpl1/header"}
+    <div class="main-wrap clearfix" style="*z-index:10;*position:relative;width:100%;margin-left:auto;margin-right:auto;;background-color:">
+        <div class="main clearfix page_main" style="width:1000px;">
+        	<div class="content yibuLayout_Body" style="min-height:100px;margin-left:auto;margin-right:auto;;background-color:" id="yibuLayout_center">
+        	    <div id="view_main_1_37674" class="mainSamrtView yibuSmartViewMargin">
+<div class="yibuFrameContent main__Item0" style="height:1370px;width:100%;"><div class="runTimeflowsmartView"><div id="view_list_5_37674" class="yibuSmartViewMargin absPos" oldbottom="1367">
+<div class="yibuFrameContent list_Style5_Item0 view_list_5_37674_Style5_Item0"><!--list-->
+    <ul class="w_piclist clearfix">
+    {foreach $article_list as $article}
+            <li class="w_piclist_item clearfix">
+                <div class="w_piclist_img">
+                  
+                </div>
+                <div class="w_piclist_content">
+                    <div class="w_piclist_content_in" style="margin-left: 0px;">
+                        <div class="w_piclist_title" style="text-align: center;">
+                            <a href="<{:real_url('article',$is_html,0,$article.article_id)}>" target="_blank" style="font-size: 20px;"><{$article.article_name}></a>
+                        </div>
+                            <div class="w_piclist_int">
+                                <p><span><{$article.article_des}></span></p>
+
+                            </div>
+                                            </div>
+                </div>
+            </li>
+{/foreach}
+           
+    </ul>
+        <div class="pager f_clearfix" id="pager"><{$html_page}></div>
+
+<!--/list-->
+<script type="text/javascript">
+    //防止分页报错
+    var list_5 = null;
+    $(function () {
+        $("img.lazyload").lazyload({ skip_invisible: false, effect: "fadeIn", failure_limit: 15, threshold: 100 });
+    });
+
+</script></div>
+</div>
+<div id="view_text_7_37674" class="yibuSmartViewMargin absPos" oldbottom="227">
+<div class="yibuFrameContent overflow_hidden text_Style1_Item0 view_text_7_37674_Style1_Item0" style="height:107px;width:400px;">
+<style type="text/css">
+    #view_text_7_37674_txt ul{ padding-left:20px;}
+</style>
+<div id="view_text_7_37674_txt" style="cursor:default; height:100%; width:100%;">
+    <div class="editableContent" style="line-height:1.5;">
+        <p style="text-align: center;"><span style="font-family: Baskerville, &#39;Baskerville Old Face&#39;, &#39;Hoefler Text&#39;, Garamond, &#39;Times New Roman&#39;; font-size: 42px; color: rgb(63, 63, 63);">INFORMATION</span></p><p style="text-align: center; line-height: normal;"><span style="font-size: 16px; font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; color: rgb(63, 63, 63);">新闻资讯</span></p><p style="line-height: 3em; text-align: center;"><br></p>
+    </div>
+</div>
+<script>
+    Pagination('view_text_7_37674_txt',"首页","尾页","上一页","下一页");
+</script>
+</div>
+</div>
+</div></div>
+</div>
+
+        	</div>
+        </div>
+    </div>
+  {include file="tpl/tpl1/footer"}
+</body></html>

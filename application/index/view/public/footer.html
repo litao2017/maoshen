@@ -1,0 +1,38 @@
+<div class="qqico">
+	&nbsp;<br /></div>
+<div id="footer">
+	<div class="footer-top">
+		<div class="main flex-abw">
+			<a href="/" title="" class="footer-logo tac flex-none" style="float:left">
+				<img src="<{$Think.const.INDEX_IMAGE_URL}>logo2.png" alt=""  />
+				
+			</a>
+			<div class="footer-contact" style="float:left;margin-left: 10px">
+				<h3 class="footCont-title opacity98">联系我们</h3>
+				<div class="footCont-info opacity8">
+					<p>
+	业务咨询：<{$config.tel}>
+</p>					<p>电子邮箱：<{$config.email}></p>
+					<p>地　　址：<{$config.address}></p>	
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="footer-bottom tac">
+		<{$config.copyright}>
+		<br>
+		<{$config.beian}>
+        	</div>
+	
+</div>
+<script type="text/javascript">
+var url=location.href;
+
+     $(".header-nav li a").each(function(){
+       
+       var thisUrl=$(this).attr("href");
+        
+          if(url.indexOf(thisUrl)>=0) $(this).addClass('on');
+       })
+</script>

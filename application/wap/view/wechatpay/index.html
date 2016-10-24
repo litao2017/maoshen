@@ -1,0 +1,89 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <title>微信安全支付</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>makeorder.css?2">
+
+    <script type="text/javascript">
+
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                <{$jsApiParameters}>,
+                function(res){
+                    WeixinJSBridge.log(res.err_msg);
+                    
+                    if(res.err_msg=="get_brand_wcpay_request:ok"){
+                        //支付成功
+                        var pay_info=document.getElementById("pay_info");
+                        var pay_ok=document.getElementById("pay_ok");
+                        pay_info.style.display="none";
+                        pay_ok.style.display="block";
+                        
+                    }else{
+                      // alert(res.err_code+' '+res.err_desc+res.err_msg);调试提示
+                    }
+
+                }
+            );
+        }
+
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <a href="javascript:history.go(-1)" class="go_back"><</a> 订单支付
+</header><!-- /header -->
+    <div id="payment">
+     <fieldset id="pay_info">
+        <legend>订单信息</legend>
+           <ol>
+            <li>
+       商品:<{$order.order_name}><br>
+      订单号:<{$order.order_sn}><br>
+       支付金额:<span style="color:red;font-weight: bold"><{$order.amount}></span>
+       <br><div class="line"></div>
+
+       收货人:<{$address.consignee}><br>
+       联系电话:<{$address.tel}><br>
+       收货地址:<{$address.address}><br>
+                 </li>
+                 </ol>
+                     <button type="button" class="btn" style="width:80%;display:block" onclick="callpay()">确认支付</button>
+    </fieldset>
+    
+     <fieldset id="pay_ok" style="display:none">
+        <legend>支付成功</legend>
+           <ol>
+            <li>
+       订单支付成功！
+                 </li>
+                 <li>订单支付成功！感谢您的支持！</li>
+                 </ol>
+                     <button type="button" class="btn" style="width:47%;display:block;float:left;margin-left:2%" onclick="location.href='/wap/order/index/s/1'">查看订单</button>
+ <button type="button" class="btn" style="width:47%;display:block;float:left;margin-left:2%" onclick="location.href='/wap/user/'">个人中心</button>
+    </fieldset>
+
+
+
+
+       
+    </div>
+</body>
+</html>

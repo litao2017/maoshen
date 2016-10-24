@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><{$pro_info.products_name}>_<{$config.title}></title>
+  <meta name="keywords" content="<{$config.keywords}>" />
+  <meta name="description" content="<{$config.description}>" />
+   <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>style.css" />
+  <script src="<{$Think.const.INDEX_JS_URL}>jquery.min.js" type="text/javascript"></script>
+  <!--[if lte IE 9]>
+      <link rel="stylesheet" href="<{$Think.const.INDEX_CSS_URL}>ieCss.css" />
+    <![endif]-->
+
+</head>
+<body>
+<!--通用头部 start-->
+ {include file="public/header" /} 
+
+  <!-- 通用头部 end -->
+<!--.container start -->
+<div class="container">        	
+	  
+        <ul class="bzproduct">
+        
+        		{foreach $pro_list as $pro}
+        
+        
+    		    	<li class="bzproduct-list">
+	    		<div id="msproduct<{$pro.products_id}>" class="bzproduct-anchor"></div>
+	    		<div class="bzproduct-main">
+		    		<dl class="bzproduct-table">
+		    			<dt class="bzproduct-icon"><img src="<{$pro.image}>" alt="<{$pro.products_name}>"></dt>
+		        		<dd class="bzproduct-bd">
+		        			<div class="bzproduct-title"><{$pro.products_name}></div>
+		        			<div class="bzproduct-text"><p>
+	<{$pro.content}>
+</p>
+<p>
+	<br />
+</p></div>
+		        		</dd>
+		        	</dl>
+		        </div>
+	    	</li>
+        	    	
+            {/foreach}        
+                    
+                    
+            </ul>
+</div>
+<!--.container end -->
+	
+<!--通用尾部 start-->
+ {include file="public/footer" /} 
+
+
+</body>
+</html>

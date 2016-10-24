@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人中心</title>
+<link rel="icon" href="/favicon.ico">
+
+<style>
+*{padding:0;margin:0;}
+body{background:#f8f4d9;color:#000;font-size:14px;}
+ul{list-style:none;}
+a{text-decoration:none;color:#000;}
+select,input{border:1px solid #a1524e;background:#efebea;height:25px;}
+#main{width:1100px;;margin:20px auto;}
+.left{display:inline-block;background:#fefdf8;position:relative;width:170px;border:1px solid #934946;margin-bottom:15px;height:900px;font-weight:bold;}
+.left img{display:block;width:110px;height:110px;margin:30px auto;border:1px solid #a65753;}
+.left h2{text-align:center;}
+.left ul {width:100%; list-style:square inside url('/static/index/image/ul4.jpg');}
+.left ul li{margin-top:10px;line-height:40px;padding-left:47px;}
+.left ul .active{display:block;background:#d5d4d2;}
+.left ul li a{display:inline-block;width:104px;height:40px;}
+
+
+.right{width:926px;height:900px;background:#efebea;float:right;border:1px solid #783b38;margin-bottom:15px;box-shadow:2px -2px 2px #cbc5af;}
+h4{margin-top:30px;}
+
+table{padding-left:40px;}
+table a{color:#902d28;}
+.jichu{height:100px;width:300px;margin:10px 0 20px 0}
+.anquan{margin-top:10px;width:100%;height:400px;}
+.shuo{width:600px;}
+
+.order6{margin-top:10px;}
+.reproduct{border:1px solid #be847d;background:#fcfaee;}
+.reproduct_top{background:#81100c;height:25px;color:#FFF;position:relative;}
+.reproduct_top a{color:#fff;font-size:14px;display:inline-block;background:#9c2a2a;width:60px;line-height:25px;text-align:center;border-radius:3px;}
+.reproduct_top .more{position:absolute;right:25px;background:#c0575b;width:80px;}
+.reproduct_c{padding:5px;max-width:200px;margin:10px 5px 10px 0px;border:1px solid #c7c5bc;display:inline-block;}
+.reproduct_c img{width:200px;height:270px;}
+.reproduct_ul ul li{margin:2px 0;font-size:10px;}
+</style>
+
+
+</head>
+
+<body>
+{include file="public/header"}
+<script>
+	$(function(){
+		$(".left ul a").click(function(){
+			$(this).addClass("active");
+				
+			$(this).siblings().removeClass("active");
+			
+			
+			
+			
+			})
+		
+		
+		
+		
+		
+		})
+
+
+
+
+</script>
+<div id="main">
+	<div class="left">
+    <img src="<{$user_info.portrait|default='/static/index/image/default.jpg'}>">
+    <h2>个人中心</h2>
+    <ul>
+    	<a class="active" href="/index/user/safe" target="openhere"><li>安全设置</li></a>
+        <a href="/index/user/user_info" target="openhere"><li>个人资料</li></a>
+        <!--<a href="/index/user/alipay" target="openhere"><li>支付宝绑定</li></a>-->
+        <a href="/index/user/address" target="openhere"><li>收货地址</li></a>
+          <a href="/index/goods/collect" ><li>我的收藏</li></a>
+            <a href="/index/order/order_list" ><li>我的订单</li></a>
+            
+            <a href="/index/user/loginout"><li>退出登录</li></a>
+        
+    </ul>
+    
+	</div>
+	<div class="right">
+    	<iframe src="/index/user/<{$act}>{if $address_id}/address_id/<{$address_id}>{/if}" frameborder="0" width="926" height="900" name="openhere">
+    	
+        </iframe> 
+	</div>
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="reproduct">
+    	<div class="reproduct_top">
+             	<a href="">向您推荐</a>
+                <a class="more" href="/index/goods/mall_center">更多>>></a>
+        </div>
+        {foreach name="best_goods" item="goods"}
+        <a href="/index/goods/goods_info/goods_id/<{$goods.goods_id}>" title="<{$goods.goods_name}>">
+    	<div class="reproduct_c">
+        	<img src="<{$goods.goods_src}>" alt="<{$goods.goods_name}>">
+            <div class="reproduct_ul">
+            	<h5><{$goods.name}></h5>
+            	<ul>
+                	<li>价 格：<span {if $goods.promote_price != 0}style="text-decoration:line-through;"{/if}><{$goods.goods_price}>/元</span></li>
+                    <li style="color:red;">促销价：{if $goods.promote_price != 0}
+          <{$goods.promote_price}>/元
+          {else}
+         无
+          {/if}</li>
+                    <li>五行分类：<{$goods.cate_name}></li>
+                </ul>
+            </div>
+        </div>
+        </a>
+         {/foreach}
+    </div>
+</div>
+{include file="public/footer"}
+</body>
+</html>

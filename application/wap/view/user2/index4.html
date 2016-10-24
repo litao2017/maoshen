@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>个人中心</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+<style type="text/css"> 
+body{
+    font-family: dashicons, 'Segoe UI', 'WenQuanYi Micro Hei', 'WenQuanYi Micro Hei Mono', 'Microsoft Yahei', 'Microsoft Yahei Mono', 微软雅黑, sans-serif;
+}
+section .ul_item li{
+    font-size: 12px;
+    font-weight: 600;
+}
+footer .ul_footer_nav {
+    overflow: hidden;
+    height: 60px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid #efefef;
+    width: 100%;
+    background: #fff;
+}
+footer .ul_footer_nav li img {
+    width: 60px;
+    height: 60px;
+}
+header{
+    background:url(<{$Think.const.WAP_IMAGE_URL}>123.jpg);
+    background-size:cover;
+    padding:15px 0px;
+}
+#header_idv{
+    
+    width:100%;
+    background: rgba(255, 255, 255, .3);
+    border-color: #e3ebc3;
+    border-color: rgba(255, 255, 255, .6);
+    border-style: solid;
+    border-width: 2px;
+    box-sizing: border-box ;
+}
+
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+<!-- <div class="notice">&nbsp;&nbsp<span onclick="closeNotice()" >×</span></div> -->
+<script>  
+function closeNotice(){
+    var notice=document.getElementsByClassName('notice')[0];
+    notice.parentNode.removeChild(notice);
+}
+</script>
+<header>
+<div id="header_idv">
+    
+
+   <img src="<{$user_info.headimgurl}>">    <div>
+        <p>会员号：<{$user_info.user_name}></p>
+        <p>会员昵称： <{$user_info.nickname}></p>
+      
+        <p>推荐人：<{$user_info.parent_id}></font></p>
+    </div>
+    </div>
+</header>
+<section>
+<!--     <div class="info">
+
+  <div><p>团队</p><p><{$user_info.tuan_money}></p></div>
+    <div onclick="location.href='distribute.php?act=tuiguang'"><p>我的推广</p><p><{$user_info.all_fencheng}></p></div>
+   <div onclick="location.href='distribute.php?act=fenxiao1'"><p>待确认</p><p><{$user_info.nosure_fencheng}></p></div>
+    <div><p>可用<{$shop_config.unit}></p><p><{$user_info.sure_fencheng}></p></div>
+ 
+
+
+</div> -->
+<!--    <ul class="ul_nav">
+     <li><a href="/index.php/wap/order"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_1.jpg"><p>待付款</p></a></li>
+     <li><a href="user.php?act=my_order&s=1"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_2.jpg"><p>待收货</p>{if $dsh_num}<span class="dsh_num">{$dsh_num}</span>{/if}</a></li>
+     <li><a href="user.php?act=address_list"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_3.jpg"><p>收货地址</p></a></li>
+     <li><a href="user.php?act=profile"><img src="<{$Think.const.WAP_IMAGE_URL}>icon_4.jpg"><p>个人资料</p></a></li>
+ </ul> -->
+     <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+ 
+    
+       
+      <li onclick="location.href='user.php?act=profile'">我的订单</li>
+        <li style="height:20px;line-height: 20px;color:#ccc">待收货：<font>1</font></li>
+    </ul>
+    <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+       
+      <li onclick="location.href='user.php?act=profile'">团队：<font style="font-size: 16px">895411</font></li>
+        <li onclick="location.href='#'">推广额：<font style="font-size: 16px">895411</font></li>
+        <li onclick="location.href='user.php?act=message_list'">已确认：<font style="font-size: 16px">895411</font>未确认：<font style="font-size: 16px">895411</font></li>
+        <li style="height:20px;line-height: 20px;color:#ccc">去提现（可提500）</li>
+    </ul>
+  <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+ 
+    
+       
+      <li onclick="location.href='user.php?act=profile'">一级：<font style="font-size: 16px">200</font></li>
+        <li onclick="location.href='#'">二级：<font style="font-size: 16px">250</font></li>
+        <li onclick="location.href='user.php?act=message_list'">三级：<font style="font-size: 16px">300</font></li>
+        <li style="height:20px;line-height: 20px;color:#ccc" class="noicon">团队人数：500</li>
+    </ul>
+</section>
+<footer>
+<div style="height:70px;"></div>
+    <ul class="ul_footer_nav">
+        
+        <li><a href="/mobile/"><img src="<{$Think.const.WAP_IMAGE_URL}>1-01.png"></a></li>
+        <li><a href="/mobile/distribute.php?act=erweima"><img src="<{$Think.const.WAP_IMAGE_URL}>1-02.png"></a></li>
+        <li class="current"><a href="/mobile/user.php"><img src="<{$Think.const.WAP_IMAGE_URL}>1-06.png"></a></li>
+    </ul>
+</footer>
+</body>

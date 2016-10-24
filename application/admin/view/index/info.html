@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>首页</title>
+ <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css">
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>bootstrap.min.js"></script>
+  <style type="text/css">
+  .badge{
+  	background:red;
+  }
+  </style>
+  <script>
+  
+  		
+   	var myDate;
+    setInterval(function(){
+		
+		$.post('/admin/index/ajax_time',function(data){
+			 myDate = data;
+			})
+		
+        //myDate = new Date();
+    
+	   $('.list-group-item>span') .html(myDate);
+    
+	
+	
+	},1000)
+  
+  
+  
+  </script>
+</head>
+<body>
+
+<div class="panel panel-info">
+  <!--<div class="panel-heading">当前位置是：首页</div>-->
+  <div class="panel-body">
+ 	欢迎 <font color="#FF0000"><{$admin_name}></font> 访问网站管理后台
+	
+  </div>
+   <div class="panel-heading">系统信息</div>
+     <div class="panel-body">
+<div class="list-group" style="width:400px;margin-left: 20px">
+
+  <a class="list-group-item">
+
+    操作系统：<{$info.os}>
+  </a>
+  <a class="list-group-item">
+
+    网站域名/IP：<{$info.domain}>(<{$info.ip}>)
+  </a>
+  
+  <a class="list-group-item">
+    
+    Apache版本：<{$info.apache}>
+  </a>
+  <a class="list-group-item">
+    PHP版本：<{$info.php}>
+  </a>
+  <a class="list-group-item">
+    MySQL版本：<{$info.mysql}>
+  </a>
+  <a class="list-group-item">
+    服务器时间：<span><{$info.time|date= "Y-m-d H:i:s",###}></span>
+  </a>
+  
+  <a class="list-group-item">
+    运行方式：<{$info.sapi}>
+  </a>
+</div>
+  </div>
+</div>
+
+</body>
+</html>

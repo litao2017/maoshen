@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>common.css">
+  <link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>style.css">
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery.min.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery.SuperSlide.js"></script>
+  <script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>common.js">
+  </script>
+  <title>后台首页</title>
+</head>
+<body>
+
+    <div class="top">
+
+      <div id="top_t">
+
+        <div id="logo" class="fl"></div>
+
+        <div id="photo_info" class="fr">
+
+          <div id="photo" class="fl">
+            <a href="#"><img src="<{$Think.const.ADMIN_IMAGE_URL}>/a.png" alt="" width="60" height="60"></a>
+          </div>
+
+          <div id="base_info" class="fr">
+
+            <div class="help_info">
+
+              <a href="/" id="hp" target="_blank">首页</a>
+
+              <a href="/wap/index" id="gy" target="_blank">手机版</a>
+
+              <a href="/admin/index/logout" id="out">退出</a>
+
+            </div>
+
+            <div class="info_center"><{$Think.cookie.admin_name}>
+            
+            &nbsp; &nbsp; &nbsp; &nbsp;<a href="/admin/index/clear_temp" style="color:#FFF;">清除缓存</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+ 
+    </div>
+    <div class="side" style="top:81px;">
+        <div class="sideMenu" style="margin:0 auto">  
+        {foreach $menu_list as  $val}
+          <h3> <{$val.menu_name}></h3>
+          <ul>
+          {foreach $val.child as  $child}
+ <li ><a href="/admin/<{$child.menu_c}>/<{$child.menu_a}>" target="right"><{$child.menu_name}></a></li>
+           {/foreach}    
+         </ul>
+         
+        {/foreach}    
+       
+       </div>
+
+    </div>
+
+    <div class="main" style="top:81px;">
+
+       <iframe name="right" id="rightMain" src="/admin/index/info" ></iframe>
+    </div>
+
+    <div class="bottom">
+
+      <div id="bottom_bg">衢州猫神网络科技有限公司版权所有</div>
+
+    </div>
+
+    <div class="scroll">
+
+          <a href="javascript:;" class="per" title="使用鼠标滚轴滚动侧栏" onclick="menuScroll(1);"></a>
+
+          <a href="javascript:;" class="next" title="使用鼠标滚轴滚动侧栏" onclick="menuScroll(2);"></a>
+
+    </div>
+
+</body>
+</html>

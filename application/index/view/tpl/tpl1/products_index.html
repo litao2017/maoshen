@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://mbwz323.wezhan.cn/cpzs -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+  
+
+
+    <title>产品展示</title>
+    <meta name="description" content="<{$config.description}>">
+    <meta name="keywords" content="<{$config.keywords}>">
+
+    <link rel="stylesheet" href="<{$static}>base.pc.css" type="text/css">
+        <link href="<{$static}>iconfontV2.css" rel="stylesheet">
+        <link rel="stylesheet" href="<{$static}>RenderRunTimeCss2" type="text/css">
+    
+
+    <script type="text/javascript" src="<{$static}>jquery-1.9.1.min.js" style="color: rgb(0, 0, 0);"></script>
+    <script type="text/javascript" src="<{$static}>jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<{$static}>public.common.min.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.lazyload.min.js"></script>
+
+        <script type="text/javascript" src="<{$static}>underscore.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.slider.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.color.js"></script>
+<script type="text/javascript" src="<{$static}>jquery.mjs.nestedSortable.js"></script>
+<script type="text/javascript" src="<{$static}>searchExt.js"></script>
+
+
+
+    <script type="text/javascript" src="<{$static}>velocity.min.js"></script>
+    <script type="text/javascript" src="<{$static}>velocity.ui.min.js"></script>
+    <script type="text/javascript" src="<{$static}>jquery.validatestar.min.js"></script>
+
+    
+</head>
+<body>
+      
+        <script type="text/javascript">
+            (function($) {
+                $.extend({
+                    request: function(m) {
+                        var sValue = location.search.match(new RegExp("[\?\&]" + m + "=([^\&]*)(\&?)", "i"));
+                        return sValue ? sValue[1] : sValue;
+                    },
+                    urlUpdateParams: function(url, name, value) {
+                        var r = url;
+                        if (r != null && r != 'undefined' && r != "") {
+                            value = encodeURIComponent(value);
+                            var reg = new RegExp("(^|)" + name + "=([^&]*)(|$)");
+                            var tmp = name + "=" + value;
+                            if (url.match(reg) != null) {
+                                r = url.replace(eval(reg), tmp);
+                            } else {
+                                if (url.match("[\?]")) {
+                                    r = url + "&" + tmp;
+                                } else {
+                                    r = url + "?" + tmp;
+                                }
+                            }
+                        }
+                        return r;
+                    }
+                });
+            })(jQuery);
+            $(function() {
+                $(".deviceSwitch").find("div[data-device=pc]").addClass("active");
+                $(".deviceSwitch").find("div").not(".active").click(function() {
+                    if (window.location.pathname == "/") {
+                        window.location.href = window.location.origin + "?forceprev=mobile&setprev=mobile";
+                    }else{
+                        var mobileUrl = "http://" + window.location.host + "/prevmobilepage/37675"+window.location.search;
+                        window.location.href = $.urlUpdateParams(mobileUrl, "setprev", $(this).attr("data-device"));
+                    }
+                });
+            });
+        </script>
+    <div id="view_layout_1_843" class="mainSamrtView yibuSmartViewMargin">
+<div class="yibuFrameContent layout_Block2_Item0" style="border-style:none;">
+       <style type="text/css">
+
+ .header,.main-wrap .main,.footer { position:relative; clear:both; margin:0 auto; padding:0;}
+ .main-wrap { clear:both; margin:0; padding:0; width:auto; }
+ .main-wrap .main {}
+
+.main-wrap .main .content { width:100%;}
+
+body{
+background-color:;
+
+}
+</style>
+
+ {include file="tpl/tpl1/header"}
+    <div class="main-wrap clearfix" style="*z-index:10;*position:relative;width:100%;margin-left:auto;margin-right:auto;;background-color:">
+        <div class="main clearfix page_main" style="width:1000px;">
+        	<div class="content yibuLayout_Body" style="min-height:100px;margin-left:auto;margin-right:auto;;background-color:" id="yibuLayout_center">
+        	    <div id="view_main_1_37675" class="mainSamrtView yibuSmartViewMargin">
+<div class="yibuFrameContent main__Item0" style="height:990px;width:100%;"><div class="runTimeflowsmartView"><div id="view_list_6_37675" class="yibuSmartViewMargin absPos" oldbottom="988">
+<div class="yibuFrameContent overflow_hidden list_Style6_Item0 view_list_6_37675_Style6_Item0" style="height:721px;width:1025px;"><div id="bakload" style="position: absolute;left: 50%; top: 30%;  z-index:10; display:none; ">
+    <img class="bak-loadimg" src="<{$static}>grayloading.gif">
+</div>
+<!--list-->
+   <div style="height:90%;">
+        <ul class="w_piclist clearfix">
+        {foreach $pro_list as $products}
+                <li class="w_piclist_item">
+                    <div class="w_piclist_img">
+                        <a href="<{:real_url('products',$is_html,0,$products.products_id)}>" target="_blank">
+                            <img class="lazyload" alt="<{$products.products_name}>"  src="<{$products.image}>" style="display: inline;">
+                        </a>
+                    </div>
+                    <div class="w_piclist_content">
+                        <span class="w_piclist_title"><{$products.products_name}></span>
+                    </div>
+                </li>
+            {/foreach}
+               
+        </ul>
+    </div>
+        <div class="pager f_clearfix" id="pager"><ul style="margin-top:5px;"><li class="current-page"><span>1</span></li><li class="individual-page"><a href="javascript:TurnPageSmartView(37675,'view_list_6_37675',false,2,false,'','"undefined"','','false',list_6)">2</a></li><li class="next-page"><a href="javascript:TurnPageSmartView(37675,'view_list_6_37675',false,2,false,'','"undefined"','','false',list_6)">下一页</a></li></ul><script type="text/javascript">list_6=null;</script></div>
+<!--/list-->
+<script type="text/javascript">
+    //防止分页报错
+    var list_6 = null;
+    $(function () {
+        $("img.lazyload").lazyload({ skip_invisible: false, effect: "fadeIn", failure_limit: 15, threshold: 100 });
+        $('#view_list_6_37675 .w_piclist_int').each(function () {
+            if (parseInt($(this).css('line-height')))
+                $(this).css('height', parseInt($(this).css('line-height')) * 2 + 'px');
+        });
+    });
+
+</script></div>
+</div>
+<div id="view_category_9_37675" class="yibuSmartViewMargin absPos" oldbottom="244" style="z-index: 99999;">
+<div class="yibuFrameContent overflow_hidden category_Style2_Item0 view_category_9_37675_Style2_Item0" style="height: 52px; width: 1000px; overflow: visible;">
+
+<!-- <ul class="w_category_first" styleitem="Style2">
+            <li class="w_category_first_item for_search" style="width:25%;*width:24.5%" id="view_category_9_37675_w_category_first_item" data-cid="1090752">
+
+                <h3 class="w_category_first_title" style="width:100%;">
+                    <a href="javascript:void(0)" onclick="view_category_9_37675.ShowResultPageList(&#39;product&#39;,&#39;1090752&#39;)">
+                            <i class="iconfont right_icon"></i>
+                        产品分类一
+                    </a>
+                </h3>
+                /w_category_second
+            </li>
+            <li class="w_category_first_item for_search" style="width:25%;*width:24.5%" id="view_category_9_37675_w_category_first_item" data-cid="1127241">
+
+                <h3 class="w_category_first_title" style="width:100%;">
+                    <a href="javascript:void(0)" onclick="view_category_9_37675.ShowResultPageList(&#39;product&#39;,&#39;1127241&#39;)">
+                            <i class="iconfont right_icon"></i>
+                        产品分类二
+                    </a>
+                </h3>
+                /w_category_second
+            </li>
+            <li class="w_category_first_item for_search" style="width:25%;*width:24.5%" id="view_category_9_37675_w_category_first_item" data-cid="1127242">
+
+                <h3 class="w_category_first_title" style="width:100%;">
+                    <a href="javascript:void(0)" onclick="view_category_9_37675.ShowResultPageList(&#39;product&#39;,&#39;1127242&#39;)">
+                            <i class="iconfont right_icon"></i>
+                        产品分类三
+                    </a>
+                </h3>
+                /w_category_second
+            </li>
+            <li class="w_category_first_item for_search" style="width:25%;*width:24.5%" id="view_category_9_37675_w_category_first_item" data-cid="1127243">
+
+                <h3 class="w_category_first_title" style="width:100%;">
+                    <a href="javascript:void(0)" onclick="view_category_9_37675.ShowResultPageList(&#39;product&#39;,&#39;1127243&#39;)" style="border-right-style: none;">
+                            <i class="iconfont right_icon"></i>
+                        产品分类四
+                    </a>
+                </h3>
+                /w_category_second
+            </li>
+
+</ul> -->
+<!--/w_category_first-->
+<!--/w_category-->
+
+<script type="text/javascript">
+    $(function () {
+
+        //
+        //处理边框导致的二级菜单位置错误变化
+        var borderWith =0;
+        if($("#view_category_9_37675_w_category_first_item").parent().length>0){
+            borderWith  = ($("#view_category_9_37675_w_category_first_item").parent().css("borderBottomWidth")).toString().split("p")[0];
+        }
+
+        $("#view_category_9_37675 .w_category_seconds").css("left", 0 - borderWith);
+        $("#view_category_9_37675 .w_category_third").css("top", 0 - borderWith);
+
+        //处理超出设计边框位置的二级菜单不能显示的问题
+        $("#" + 'view_category_9_37675').children("div").eq(0).css("overflow", "visible");
+
+        $('#view_category_9_37675 .w_category_first_item').hover(function () {
+            $(this).children(".w_category_first_title").toggleClass("first_hover");
+        });
+
+        $('#view_category_9_37675 .w_category_second_item').hover(function () {
+            $(this).children(".w_category_second_title").toggleClass("second_hover");
+
+        });
+        $('#view_category_9_37675 .w_category_third_item').hover(function () {
+            $(this).children(".w_category_third_title").toggleClass("third_hover");
+
+        });
+
+        //因分割线与边框重叠 删除各级li里面最后一个item的分割线
+        $("#view_category_9_37675 .w_category_first_title:last").children().css("border-right", "none");
+
+        $("#view_category_9_37675 .w_category_second_title:last").children().css("border-bottom", "none");
+
+        $("#view_category_9_37675 .w_category_second_item").each(function(){
+
+            $(this).find(".w_category_third .w_category_third_item:last a").css("border-bottom", "none");
+        });
+        if ("False" == "False") {
+            jQuery("#" + 'view_category_9_37675').css("z-index", "99999");
+        }
+
+        SetCategorySelectedStyle('view_category_9_37675');
+        SetCategory2SelectedStyle('view_category_9_37675');
+
+    });
+
+
+    view_category_9_37675.ShowResultPageList =  function (entityName, categoryId)
+    {
+        if ("False".toLocaleLowerCase() != "true") {
+            if ("True".toLocaleLowerCase() == "true") {
+                window.location.href = "/categoryResultlist?EntityTypeName=" + entityName + "&categoryId=" + categoryId;
+            } else {
+                TurnPageCategoryListSmartView("37675", "", "False", "1", "", "", entityName, categoryId);
+            }
+        }
+    }
+
+    function SetCategorySelectedStyle(cId) {
+        var rawurl = window.location.pathname + window.location.search;
+        $("#" + cId+' .for_search').each(function () {
+            var data_cid = $(this).attr("data-cid");
+            if (data_cid != null)
+            {
+                var arr = rawurl.split("=");
+                var select_cid = arr[arr.length-1];
+                if (select_cid == data_cid) {
+                    $(this).addClass("category_select");
+                    return;
+                }
+            }
+        })
+    }
+
+    function SetCategory2SelectedStyle(cId) {
+        var rawurl = window.location.pathname + window.location.search;
+        $("#" + cId+' .w_category_seconds.w_category_second_item.for_search').each(function () {
+            var data_cid = $(this).attr("data-cid");
+            if (data_cid != null)
+            {
+                var arr = rawurl.split("=");
+                var select_cid = arr[arr.length-1];
+                if (select_cid == data_cid) {
+                    $(this).addClass("category_select");
+                    return;
+                }
+            }
+        })
+    }
+</script>
+</div>
+</div>
+<div id="view_text_10_37675" class="yibuSmartViewMargin absPos" oldbottom="157">
+<div class="yibuFrameContent overflow_hidden text_Style1_Item0 view_text_10_37675_Style1_Item0" style="height:107px;width:400px;">
+<style type="text/css">
+    #view_text_10_37675_txt ul{ padding-left:20px;}
+</style>
+<div id="view_text_10_37675_txt" style="cursor:default; height:100%; width:100%;">
+    <div class="editableContent" style="line-height:1.5;">
+        <p style="text-align: center;"><span style="font-family: Baskerville, &#39;Baskerville Old Face&#39;, &#39;Hoefler Text&#39;, Garamond, &#39;Times New Roman&#39;; font-size: 42px; color: rgb(63, 63, 63);">PRODUCT</span></p><p style="text-align: center; line-height: normal;"><span style="font-size: 16px; font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; color: rgb(63, 63, 63);">产品展示</span></p><p style="line-height: 3em; text-align: center;"><br></p>
+    </div>
+</div>
+<script>
+    Pagination('view_text_10_37675_txt',"首页","尾页","上一页","下一页");
+</script>
+</div>
+</div>
+</div></div>
+</div>
+
+        	</div>
+        </div>
+    </div>
+   
+{include file="tpl/tpl1/footer"}
+
+</body></html>

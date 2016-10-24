@@ -1,0 +1,44 @@
+<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+
+  wx.config({
+    debug: false,
+    appId: '<{$signPackage.appId}>',
+    timestamp: '<{$signPackage.timeStamp}>',
+    nonceStr: '<{$signPackage.nonceStr}>',
+    signature: '<{$signPackage.signature}>',
+    jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage' 
+    ]
+  });
+ wx.ready(function () {
+    //监听“分享给朋友”
+    wx.onMenuShareAppMessage({
+      title: '<{$title}>',
+      desc: '<{$desc}>',
+      link: '<{$link}>',
+      imgUrl: '<{$imgUrl}>',
+
+      success: function (res) {
+  
+      },
+
+    });
+
+    //分享到朋友圈
+    wx.onMenuShareTimeline({
+      title: '<{$titlee}>',
+      link: '<{$link}>',
+      imgUrl: '<{$imgUrl}>',
+
+      success: function (res) {
+    
+      },
+  
+  
+    });
+
+
+});
+</script>

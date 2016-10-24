@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title><{$fans_level}>级粉丝</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>user.css">
+<link rel="stylesheet" type="text/css" href="<{$Think.const.WAP_CSS_URL}>load.css">
+  <script type="text/javascript" src="<{$Think.const.WAP_JS_URL}>jquery-1.9.1.min.js"></script>
+<style type="text/css"> 
+
+
+
+.ul_list li{
+     background:#fff;
+     height:50px;
+
+     width:95%;
+     padding:0px 2.5%;
+     margin:10px auto;
+ }
+ .ul_list li img{
+     height:40px;
+     width:40px;
+     border-radius:40px;
+     margin:5px 10px;
+     vertical-align:middle;
+ }
+  .ul_list li span{
+     height:50px;
+    line-height: 50px;
+    float:right;
+    color:#3c6;
+ }
+ .ul_list li .user_name{
+    height:40px;
+   
+   float:left;
+     margin:5px 0px;
+ }
+ .ul_list li .user_name p{
+    height:20px;
+    line-height: 20px;
+ }
+</style>
+</head>
+<body onload="loadDiv.style.display='none';">
+ 
+    <div class="main" id="loadDiv">
+        <div class="loadEffect">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        </div>
+    </div>
+<!-- <div class="notice">&nbsp;&nbsp<span onclick="closeNotice()" >×</span></div> -->
+<script>  
+function closeNotice(){
+    var notice=document.getElementsByClassName('notice')[0];
+    notice.parentNode.removeChild(notice);
+}
+</script>
+
+
+
+
+<ul class="bd_type">
+    <li onclick="location.href='/wap/user/fans/level/<{$fans_level}>/'" {if $search_level ==1}class="currnet"{/if}>已购买</li>
+    <li onclick="location.href='/wap/user/fans/level/<{$fans_level}>/slevel/0'" {if $search_level ==0}class="currnet"{/if}>未购买</li>
+ </ul>
+
+
+
+<section>
+      <ul class="ul_item" style="background:#fff;margin-top:10px;border-bottom: 1px solid #ccc">
+
+ 
+    
+       
+      <li onclick="location.href='/wap/user/fans_order/level/<{$fans_level}>'">所有<{$fans_level}>级订单</li>
+    </ul>
+    {if $fans_list}
+  <ul class="ul_list">
+{foreach $fans_list as $fans}
+   <li><img src="<{$fans.headimgurl}>" style="float:left;"><div class="user_name"><p>昵&nbsp;&nbsp;&nbsp;&nbsp;称：<{$fans.nickname}></p><p>会员号：<{$fans.user_name}></p></div>{if $search_level ==1}<span>团队：<{$fans.tuan_money}></span>{/if}</li>
+
+   {/foreach}
+</ul>
+{else}
+<div style="text-align: center;margin-top:10px;">
+  暂无信息~~~
+</div>
+{/if}
+
+</section>
+<script type="text/javascript">
+             var page=1;
+          var num=10;
+   var fans_level=<{$fans_level}>;
+   var search_level=<{$search_level}>;
+function more() {
+    $.post('/wap/user/ajax_fans',{"num": num,"page":page,"search_level":search_level,"fans_level":fans_level},function(data){
+        if(data==""){
+           // alert("没有更多信息！");
+        }else{
+             $(".ul_list").append(data);
+                    page=page+1;
+        }
+                   
+    });
+ }
+</script>
+<script type="text/javascript">
+
+/*    $(window).scroll(function(e){  
+        var sum = $(this).scrollHeight;  
+        console.log(sum);
+        if (sum <= $(this).scrollTop() + $(this).height()) {  
+            //$(".main").append($(".child").clone());  
+            more()
+        }  
+    });  */
+      $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+          console.log(scrollTop);
+        if (scrollTop + windowHeight == scrollHeight) {
+             more();
+            // alert(1);
+        }
+   }); 
+</script>
+</section>
+{include file="public/footer_gr" /}
+</body>

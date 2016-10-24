@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+        <title>生成html</title>
+        
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery-1.9.1.min.js"></script>
+
+<link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css">
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>bootstrap.min.js"></script>
+
+<style>
+.menu ul{
+  overflow: hidden;
+}
+.menu li{
+  float:left;
+  list-style: none;
+}
+.btn-group{
+ display:block;
+  margin:0px auto;
+  height:50px;
+}
+.btn-group>.btn:first-child{
+  float:none;
+    display:block;
+  margin:0px auto;
+
+}
+.input-group{
+  margin-top:10px;
+}
+.graph {
+    width: 450px;
+    border: 1px solid #cde6ff;
+    height: 25px;
+    text-align: center;
+}
+div{padding:2px 0px;}
+input[type="checkbox"]
+{
+margin-left:10px;	
+	
+}
+#bar {
+    display: block;
+    background:#cde6ff;
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+</style>
+<script type="text/javascript"> 
+
+function goPer(perc){ 
+	//alert('hello'+perc);return true;
+	var bar;
+	
+	bar = document.getElementById('bar');
+	//nowPer = parseFloat(bar.style.width);
+	totalPer = parseInt(perc);
+	//totalPer = nowPer+perc;
+	//alert(totalPer);
+	
+	if (totalPer < 100){
+		//alert(totalPer);return  false;
+		bar.style.width = totalPer + "%";
+	}else{
+		bar.style.width ="100%";
+		document.getElementById('barMsg').innerHTML="HTML生成完毕,可以离开或者关闭本窗口！";
+		document.getElementById('barMsg').style.color="red";
+		
+	}
+	//$("bar").style.width = parseInt($("bar").style.width) + perc + "%"; 
+	bar.innerHTML = bar.style.width; 
+	return true;
+
+} 
+
+</script> 
+    </head>
+    <body>
+   <form id="sitemapForm" name="form" action="/admin/html/tran_html" method="post">
+   
+   <div class="panel panel-info">
+
+{if $mkHtml == 1}
+<div class="namezone">正在生成HTML</div>
+<div class="tablezone">
+  <div  id="notice" class="noticediv"></div>
+
+
+      <strong>总共需要生成 <span style="color:#F30"><{$total}> </span>个HTML文件：</strong>
+      
+    	<iframe src="/admin/html/html_mk/total/<{$total}>" frameborder="0" height="0" width="0" name="mkHtml"></iframe>
+     
+      	<div style="margin-top:10px;" class="graph"> 
+            <strong id="bar" style="width:0%;" ></strong> 
+        </div> 
+        <div style="color:blue; margin-top:10px;" id="barMsg">正在更新HTML，请勿离开或者关闭本窗口！</div>
+    
+</div>
+
+{else}
+
+<div class="tablezone">
+
+  <div  id="notice" class="noticediv"></div>
+
+    
+     <strong class="panel-heading">更新整站HTML：</strong>
+        
+ 	<div class="panel-heading">选择要生成html的模块：</div>
+
+  <div class="panel-body">
+  <div class="menu">
+          <ul>
+ 			<li><input type="checkbox" name="isHome" id="isHome" value="1" ><label for="isHome">首页</label>  
+                
+                <input type="checkbox" name="article" id="article" value="1"><label for="article">文章</label>
+                
+                <input type="checkbox" name="products" id="products" value="1"><label for="products">产品</label>
+                
+                <input type="checkbox" name="imgtext" id="imgtext" value="1"><label for="imgtext">图文</label>
+				
+      		<input type="checkbox" name="isLists" id="isLists" value="1"><label for="isLIsts">分类列表页</label>
+     		 <input type="checkbox" name="isContent" id="isContent" value="1"><label for="isContent">内容页</label>
+	  			<br>
+     		 <input type="checkbox" name="SELALL" value="1" id="selectAll" onClick="SelAll()"><label for="selectAll">全选</label>  </li>
+           
+         </ul>
+                  
+  </div>
+	
+     <div><strong>请挑选生成起始日期（不选即生成全部）</strong></div>
+	<br>
+     <input type="date" name="start_date" class="Wdate" size="12" value="<{$date|date="Y-m-d",###}>" >
+	
+	
+  </div>
+	   <div class="btn-group" role="group"><input type="button" class="btn btn-primary" value="生成列表" onClick="location.href='/admin/html/tranList'"></div>    
+ <div class="btn-group" role="group"><input type="button" class="btn btn-primary" value="生成" onClick="location.href='/admin/html/tranContent'"></div> 
+  <div class="btn-group" role="group"><input type="submit" class="btn btn-primary" value="点击生成"></div>	
+  
+  </div>    
+ {/if}
+</div>
+
+ </form>
+ 
+ 
+ 
+ <script>
+function SelAll(){
+	
+	$(":checkbox").prop('checked',true);	
+
+}
+</script>         
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+        <title>生成html</title>
+        
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>jquery-1.9.1.min.js"></script>
+
+<link rel="stylesheet" href="<{$Think.const.ADMIN_CSS_URL}>bootstrap.min.css">
+<script type="text/javascript" src="<{$Think.const.ADMIN_JS_URL}>bootstrap.min.js"></script>
+
+<style>
+.menu ul{
+  overflow: hidden;
+}
+.menu li{
+  float:left;
+  list-style: none;
+}
+.btn-group{
+ display:block;
+  margin:0px auto;
+  height:50px;
+}
+.btn-group>.btn:first-child{
+  float:none;
+    display:block;
+  margin:0px auto;
+
+}
+.input-group{
+  margin-top:10px;
+}
+.graph {
+    width: 450px;
+    border: 1px solid #cde6ff;
+    height: 25px;
+    text-align: center;
+}
+div{padding:2px 0px;}
+input[type="checkbox"]
+{
+margin-left:10px;	
+	
+}
+#bar {
+    display: block;
+    background:#cde6ff;
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+</style>
+<script type="text/javascript"> 
+
+function goPer(perc){ 
+	//alert('hello'+perc);return true;
+	var bar;
+	
+	bar = document.getElementById('bar');
+	//nowPer = parseFloat(bar.style.width);
+	totalPer = parseInt(perc);
+	//totalPer = nowPer+perc;
+	//alert(totalPer);
+	
+	if (totalPer < 100){
+		//alert(totalPer);return  false;
+		bar.style.width = totalPer + "%";
+	}else{
+		bar.style.width ="100%";
+		document.getElementById('barMsg').innerHTML="HTML生成完毕,可以离开或者关闭本窗口！";
+		document.getElementById('barMsg').style.color="red";
+		
+	}
+	//$("bar").style.width = parseInt($("bar").style.width) + perc + "%"; 
+	bar.innerHTML = bar.style.width; 
+	return true;
+
+} 
+
+</script> 
+    </head>
+    <body>
+   <form id="sitemapForm" name="form" action="/admin/html/tran_html" method="post">
+   
+   <div class="panel panel-info">
+<table class="table table-hover">
+<thead>
+        <tr>
+          <th>模型</th>
+          <th>内容数量</th>
+          <th>html文件数量</th>
+          <th>html首页</th>
+          <th>操作</th>
+        </tr>
+   </thead>
+    <tr>
+  <td>首页</td>
+  <td>1</td>
+  <td>1</td>
+  <td>/index.html</td>
+  <td> <a href="/admin/html/tran_index" class="btn btn-success">生成首页html</a></td>
+</tr>
+   {foreach $models as $model}   
+   <tr>
+  <td><{$model.name}></td>
+  <td><{$model.all_num}></td>
+  <td><{$model.html_num}></td>
+  <td>/<{$model.model}>/index.html</td>
+  <td> <a href="/admin/html/tran_list/model/<{$model.model}>" class="btn btn-success">生成分类首页</a>&nbsp;&nbsp;<a href="/admin/html/tran_list/model/<{$model.model}>"  class="btn btn-success">生成列表html</a>&nbsp;&nbsp;<a href="/admin/html/tran_content/model/<{$model.model}>"  class="btn btn-info">生成剩余内容html</a>&nbsp;&nbsp;<a href="/admin/html/tran_all_content/model/<{$model.model}>"  class="btn btn-warning">生成所有内容html</a></td>
+</tr>
+   {/foreach}
+
+</table>
+</div>
+
+ </form>
+ 
+ 
+ 
+ <script>
+function SelAll(){
+	
+	$(":checkbox").prop('checked',true);	
+
+}
+</script>         
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function start_flow()
+{
+    var count = 0,is_true = false;
+	
+    setInterval(function(){
+        if(!count){
+			
+			is_true = parent.goPer(<{$per}>);
+			
+			
+		
+			count++;
+			
+        }
+		
+        if(is_true){
+			
+		if("<{$goon}>"){
+           
+				window.location.href='<{$url}>';
+		}else{
+				window.parent.goPer(100);
+				
+			}
+        }
+    },600);
+}
+start_flow();
+	
+</script>
+
